@@ -2,6 +2,7 @@
  * @copyright 2024 RASHID_C
  * @license Apache-2.0
  */
+import logo from '../images/logo.svg'
 
 const aboutItems = [
   {
@@ -43,7 +44,8 @@ const About = () => {
             ))}
 
             <img
-              src="/images/logo.svg"
+              // src="/src/images/logo.svg"
+              src={logo}
               height={30}
               width={30}
               className="ml-auto md:w-[40px] md:h-[40px]"

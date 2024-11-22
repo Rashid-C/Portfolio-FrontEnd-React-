@@ -4,48 +4,56 @@
  */
 
 import SkillCard from "./SkillCard";
+import figma from "../images/figma.svg";
+import css from "../images/css3.svg";
+import js from "../images/javascript.svg";
+import node from "../images/nodejs.svg";
+import express from "../images/expressjs.svg";
+import mongodb from "../images/mongodb.svg";
+import react from '../images/react.svg';
+import tailwind from '../images/tailwindcss.svg';
 
 /**
  * Components
  */
 const skillItem = [
   {
-    imgSrc: "/images/figma.svg",
+    imgSrc: figma,
     label: "Figma",
     desc: "Design tool",
   },
   {
-    imgSrc: "/images/css3.svg",
+    imgSrc: css,
     label: "CSS",
     desc: "User Interface",
   },
   {
-    imgSrc: "/images/javascript.svg",
+    imgSrc: js,
     label: "JavaScript",
     desc: "Interaction",
   },
   {
-    imgSrc: "/images/nodejs.svg",
+    imgSrc: node,
     label: "NodeJS",
     desc: "Web Server",
   },
   {
-    imgSrc: "/images/expressjs.svg",
+    imgSrc: express,
     label: "ExpressJS",
     desc: "Node Framework",
   },
   {
-    imgSrc: "/images/mongodb.svg",
+    imgSrc: mongodb,
     label: "MongoDB",
     desc: "Database",
   },
   {
-    imgSrc: "/images/react.svg",
+    imgSrc: react,
     label: "React",
     desc: "Framework",
   },
   {
-    imgSrc: "/images/tailwindcss.svg",
+    imgSrc: tailwind,
     label: "TailwindCSS",
     desc: "User Interface",
   },
@@ -63,7 +71,13 @@ const Skill = () => {
         </p>
         <div className="grid gap-3 grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))]">
           {skillItem.map(({ imgSrc, label, desc }, key) => (
-            <SkillCard key={key} imgSrc={imgSrc} label={label} desc={desc} classes="reveal-up"/>
+            <SkillCard
+              key={key}
+              imgSrc={imgSrc}
+              label={label}
+              desc={desc}
+              classes="reveal-up"
+            />
           ))}
         </div>
       </div>

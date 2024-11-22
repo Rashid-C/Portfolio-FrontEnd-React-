@@ -4,7 +4,7 @@
  */
 
 import { ButtonPrimary, ButtonOutline } from "./components/Button";
-import profile from '../../rashid-c/images/profile.png'
+import profile from "../src/images/profile.png";
 
 /**
  * Components
@@ -50,7 +50,7 @@ const Hero = () => {
           <figure className="w-full max-w-[480px] ml-auto bg-gradient-to-t from-sky-400 via-sky-400 to-65% rounded-[60px] overflow-hidden">
             <img
               className="w-full"
-              src="/images/profile.png"
+              src={profile}
               alt="RASHID_C"
               width={656}
               height={800}
