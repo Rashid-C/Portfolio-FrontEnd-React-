@@ -168,8 +168,8 @@ const Contact = () => {
         </div>
 
         <form
-          onSubmit={handleSubmit}
-          // action="https://getform.io/f/ayvpxzmb"
+          // onSubmit={handleSubmit}
+          action="https://getform.io/f/ayvpxzmb"
           method="POST"
           className="xl:pl-10 2xl:pl-20"
         >
