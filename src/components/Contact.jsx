@@ -185,7 +185,7 @@ const Contact = () => {
                 id="name"
                 autoComplete="name"
                 required
-                placeholder="Rashid C"
+                placeholder="Your name plz..."
                 className="text-field reveal-up"
                 value={formData.name}
                 onChange={handleChange}
@@ -203,7 +203,7 @@ const Contact = () => {
                 id="email"
                 autoComplete="email"
                 required
-                placeholder="jsoanu@gmail.com"
+                placeholder="anurashid105@gmail.com"
                 className="text-field reveal-up"
                 value={formData.email}
                 onChange={handleChange}
@@ -218,7 +218,7 @@ const Contact = () => {
               <textarea
                 name="message"
                 id="message"
-                placeholder="Hi!"
+                placeholder="Hi! type here..."
                 required
                 className="text-field resize-y min-h-32 max-h-80 reveal-up"
                 value={formData.message}
