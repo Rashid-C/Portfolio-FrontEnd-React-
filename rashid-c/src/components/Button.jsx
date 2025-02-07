@@ -7,7 +7,7 @@
  * Node modules
  */
 import PropTypes from "prop-types";
-import cv from '../images/RASHID-C.pdf'
+import cv from '../images/RASHID_C-MERN_STACK_DEVELOPER.pdf'
 
 /**
  * Primary Button
