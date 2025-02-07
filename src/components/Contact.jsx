@@ -61,7 +61,7 @@ const socialLinks = [
     alt: "Twitter X",
   },
   {
-    href: "https://www.instagram.com/rashid__rayhan/",
+    href: "https://www.instagram.com/rashidc___/",
     icon: (
       <svg
         width="25"
@@ -80,7 +80,7 @@ const socialLinks = [
   },
 
   {
-    href: "https://wa.me/+917356958972", // Replace 'yourphonenumber' with your actual WhatsApp number
+    href: "https://wa.me/+917356958972", 
     icon: (
       <svg
         className=""
