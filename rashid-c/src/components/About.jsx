@@ -2,7 +2,7 @@
  * @copyright 2024 RASHID_C
  * @license Apache-2.0
  */
-import logo from '../images/logo.svg'
+import logo from '../images/logo.png'
 
 const aboutItems = [
   {

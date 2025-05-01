@@ -15,10 +15,14 @@ import cv from '../images/RASHID_C-MERN_STACK_DEVELOPER.pdf'
 
 const ButtonPrimary = ({
   href,
-  target = "_self",
+  target = "_blank",
   label,
   icon,
   classes = "",
+  ariaLabel = label,
+
+  rel = "noopener noreferrer"
+
 }) => {
   if (!href) {
     return (
@@ -27,13 +31,15 @@ const ButtonPrimary = ({
         target={target}
         className={`btn btn-primary ${classes}`}
         download={cv}
+        aria-label={ariaLabel}
+        rel={rel}
       >
         {label}
-        {icon ? (
+        {icon && (
           <span className="material-symbols-rounded" aria-hidden="true">
             {icon}
           </span>
-        ) : null}
+        )}
       </a>
     );
   } else {

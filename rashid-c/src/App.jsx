@@ -31,27 +31,20 @@ import Hero from "./Hero";
 
 const App = () => { 
 
-  useGSAP(()=>{
-    const elements=gsap.utils.toArray('.reveal-up')
- 
-
-    elements.forEach((element)=>{
-      gsap.to(element,{
-        scrollTrigger:{
-          trigger:element,
-          start:'-200 bottom',
-          end:'bottom 80%',
-          scrub:true,
-          
-        },
-        y:0,
-        opacity:1,
-        duration:1,
-        ease:'power2.out'
-      })
-    })
+  useGSAP(() => {
+    const elements = gsap.utils.toArray('.reveal-up');
     
-  })
+    ScrollTrigger.batch(elements, {
+      start: '-200 bottom',
+      onEnter: batch => gsap.to(batch, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        stagger: 0.1
+      })
+    });
+  }, []);
 
 
   return (

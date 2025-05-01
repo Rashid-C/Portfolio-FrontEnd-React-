@@ -12,7 +12,7 @@ import { useState } from "react";
  * Components
  */
 import Navbar from "./Navbar";
-import logo from "../images/logo.svg";
+import logo from "../images/logo.png";
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);

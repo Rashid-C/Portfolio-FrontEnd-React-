@@ -12,6 +12,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "axios": "^1.7.7",
+    "compression": "^1.8.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
     "prop-types": "^15.8.1",
