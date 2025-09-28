@@ -1,5 +1,5 @@
 /**
- * @copyright 2024 RASHID_C
+ * @copyright 2025 RASHID_C
  * @license Apache-2.0
  */
 
@@ -61,6 +61,7 @@ ButtonPrimary.propTypes = {
   target: PropTypes.string,
   icon: PropTypes.string,
   classes: PropTypes.string,
+  ariaLabel: PropTypes.string,
 }
 
 /**
