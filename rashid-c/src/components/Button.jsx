@@ -20,16 +20,14 @@ const ButtonPrimary = ({
   icon,
   classes = '',
   ariaLabel = label,
-
   rel = 'noopener noreferrer',
 }) => {
-  if (!href) {
+  if (href) {
     return (
       <a
-        href={cv}
+        href={href}
         target={target}
         className={`btn btn-primary ${classes}`}
-        download={cv}
         aria-label={ariaLabel}
         rel={rel}
       >
@@ -41,18 +39,25 @@ const ButtonPrimary = ({
         )}
       </a>
     )
-  } else {
-    return (
-      <button className={`btn btn-primary ${classes}`}>
-        {label}
-        {icon ? (
-          <span className='material-symbols-rounded' aria-hidden='true'>
-            {icon}
-          </span>
-        ) : null}
-      </button>
-    )
   }
+
+  return (
+    <a
+      href={cv}
+      target={target}
+      className={`btn btn-primary ${classes}`}
+      download={cv}
+      aria-label={ariaLabel}
+      rel={rel}
+    >
+      {label}
+      {icon && (
+        <span className='material-symbols-rounded' aria-hidden='true'>
+          {icon}
+        </span>
+      )}
+    </a>
+  )
 }
 
 ButtonPrimary.propTypes = {
@@ -62,6 +67,7 @@ ButtonPrimary.propTypes = {
   icon: PropTypes.string,
   classes: PropTypes.string,
   ariaLabel: PropTypes.string,
+  rel: PropTypes.string,
 }
 
 /**
@@ -77,7 +83,12 @@ const ButtonOutline = ({
 }) => {
   if (href) {
     return (
-      <a href={href} target={target} className={`btn btn-outline ${classes}`}>
+      <a
+        href={href}
+        target={target}
+        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+        className={`btn btn-outline ${classes}`}
+      >
         {label}
         {icon ? (
           <span className='material-symbols-rounded' aria-hidden='true'>

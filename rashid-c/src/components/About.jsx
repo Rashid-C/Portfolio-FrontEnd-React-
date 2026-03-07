@@ -2,7 +2,7 @@
  * @copyright 2024 RASHID_C
  * @license Apache-2.0
  */
-import logo from '../images/logo.png'
+import logo from '../images/logo-rc.svg'
 
 const aboutItems = [
   {
@@ -27,6 +27,7 @@ const About = () => {
             vision into digital masterpiece that excels in both appearance and
             performance.
           </p>
+          <p className='text-zinc-400 mb-6 md:max-w-[60ch] reveal-up'>Open to Software Developer roles in GCC, Dubai, Saudi Arabia, Kerala, and across India. Also searchable as Rashid, Rashidc, Rashid C, Rashid_C, Rashid-C, and rashidc___.</p>
           <div className='flex flex-wrap items-center gap-4 md:gap-7'>
             {aboutItems.map(({ label, number }, key) => (
               <div key={key}>
@@ -59,3 +60,5 @@ const About = () => {
 }
 
 export default About
+
+

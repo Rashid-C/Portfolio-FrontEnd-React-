@@ -15,16 +15,24 @@ const Navbar = ({ navOpen }) => {
   const navLinks = useRef([])
 
   const initActiveBox = () => {
+    if (!activeBox.current || !lastActiveLink.current) return
+
     activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px'
     activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px'
     activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px'
     activeBox.current.style.height = lastActiveLink.current.offsetHeight + 'px'
   }
 
-  useEffect(initActiveBox, [])
-  window.addEventListener('resize', initActiveBox)
+  useEffect(() => {
+    initActiveBox()
+    window.addEventListener('resize', initActiveBox)
+
+    return () => window.removeEventListener('resize', initActiveBox)
+  }, [])
 
   const activeCurrentLink = (event) => {
+    if (!activeBox.current) return
+
     lastActiveLink.current?.classList.remove('active')
     event.target.classList.add('active')
     lastActiveLink.current = event.target
@@ -35,17 +43,13 @@ const Navbar = ({ navOpen }) => {
     activeBox.current.style.height = event.target.offsetHeight + 'px'
   }
 
-  // Add scroll event listener to update active link based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
-
-      // Get all section elements
       const sections = document.querySelectorAll('section[id]')
 
-      // Find the current section based on scroll position
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100 // Offset for better UX
+        const sectionTop = section.offsetTop - 100
         const sectionHeight = section.offsetHeight
         const sectionId = section.getAttribute('id')
 
@@ -53,19 +57,16 @@ const Navbar = ({ navOpen }) => {
           scrollPosition >= sectionTop &&
           scrollPosition < sectionTop + sectionHeight
         ) {
-          // Remove active class from all links
           navLinks.current.forEach((link) => link.classList.remove('active'))
 
-          // Find the corresponding nav link and make it active
           const activeLink = navLinks.current.find(
             (link) => link.getAttribute('href') === `#${sectionId}`
           )
 
-          if (activeLink) {
+          if (activeLink && activeBox.current) {
             activeLink.classList.add('active')
             lastActiveLink.current = activeLink
 
-            // Update the active box position
             activeBox.current.style.top = activeLink.offsetTop + 'px'
             activeBox.current.style.left = activeLink.offsetLeft + 'px'
             activeBox.current.style.width = activeLink.offsetWidth + 'px'
@@ -75,13 +76,9 @@ const Navbar = ({ navOpen }) => {
       })
     }
 
-    // Add scroll event listener
     window.addEventListener('scroll', handleScroll)
-
-    // Call once to set initial state
     handleScroll()
 
-    // Clean up
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -98,18 +95,23 @@ const Navbar = ({ navOpen }) => {
       className: 'nav-link',
     },
     {
+      label: 'Services',
+      link: '#services',
+      className: 'nav-link',
+    },
+    {
       label: 'Work',
       link: '#work',
       className: 'nav-link',
     },
     {
-      label: 'Reviews',
-      link: '#reviews',
+      label: 'Experience',
+      link: '#experience',
       className: 'nav-link',
     },
     {
-      label: 'Blogs',
-      link: '#blogs',
+      label: 'Reviews',
+      link: '#reviews',
       className: 'nav-link',
     },
     {
@@ -127,7 +129,6 @@ const Navbar = ({ navOpen }) => {
           className={`${className} `}
           key={key}
           ref={(el) => {
-            // Store reference to the link element
             if (el) {
               navLinks.current[key] = el
               if (ref) ref.current = el

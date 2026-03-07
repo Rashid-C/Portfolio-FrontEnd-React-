@@ -8,7 +8,7 @@
  */
 
 import { ButtonPrimary } from "./Button";
-import logo from '../images/logo.png'
+import logo from '../images/logo-rc.svg'
 const sitemap = [
   {
     label: "Home",
@@ -127,7 +127,7 @@ const Footer = () => {
           </a>
 
           <p className="text-zinc-500 text-sm reveal-up">
-            &copy; 2025 <span className="text-zinc-200">RASHID_C</span>
+            &copy; 2026 <span className="text-zinc-200">RASHID_C</span>
           </p>
         </div>
       </div>
@@ -136,3 +136,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

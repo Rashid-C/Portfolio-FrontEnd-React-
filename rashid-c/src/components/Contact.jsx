@@ -2,8 +2,9 @@
  * @copyright 2024 RASHID_C
  * @license Apache-2.0
  */
-import axios from 'axios'
 import { useState } from 'react'
+
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
 // import { ButtonPrimary } from './Button';
 
 const socialLinks = [
@@ -81,7 +82,7 @@ const socialLinks = [
   },
 
   {
-    href: 'https://wa.me/+917356958972',
+    href: 'https://wa.me/+918078967913',
     icon: (
       <svg
         className=''
@@ -123,12 +124,30 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!WEB3FORMS_ACCESS_KEY) {
+      alert('Missing VITE_WEB3FORMS_ACCESS_KEY in frontend .env file')
+      return
+    }
+
     try {
-      const response = await axios.post(
-        'http://localhost:5000/send-email',
-        formData
-      )
-      if (response.status === 200) {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          from_name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
         alert('Message sent successfully!')
         setFormData({
           name: '',
@@ -136,6 +155,8 @@ const Contact = () => {
           subject: '',
           message: '',
         })
+      } else {
+        throw new Error(result.message || 'Submission failed')
       }
     } catch (error) {
       console.error('Error sending message:', error)
@@ -161,6 +182,8 @@ const Contact = () => {
                 key={key}
                 href={href}
                 target='_blank'
+                rel='noopener noreferrer'
+                aria-label={alt}
                 className={`w-12 h-12 grid place-items-center ring-inset ring-2 ring-zinc-50/5 rounded-lg transition-transform duration-300 ease-in-out 
              hover:scale-125 hover:shadow-2xl active:bg-zinc-50/80 reveal-up
              ${
@@ -259,3 +282,5 @@ const Contact = () => {
 }
 
 export default Contact
+
+
