@@ -6,7 +6,7 @@
 /**
  * Node modules
  */
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 /**
  * Components
@@ -56,7 +56,7 @@ const works = [
     tags: ["Next.js", "Tailwind CSS", "Responsive UI"],
     projectLink: "https://nexuscart-alpha.vercel.app",
   },
-   {
+  {
     imgSrc: kerala,
     title: "Bakery Store",
     tags: ["React.js", "Tailwind CSS", "Responsive UI"],
@@ -68,13 +68,30 @@ const ITEMS_PER_PAGE = 4;
 
 const Work = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const sectionRef = useRef(null);
   const totalPages = Math.ceil(works.length / ITEMS_PER_PAGE);
 
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentWorks = works.slice(start, start + ITEMS_PER_PAGE);
+  const emptySlots = ITEMS_PER_PAGE - currentWorks.length;
+
+  const handlePageChange = (nextPage) => {
+    setCurrentPage(nextPage);
+
+    requestAnimationFrame(() => {
+      if (!sectionRef.current) return;
+      const headerOffset = 88;
+      const targetTop =
+        sectionRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        headerOffset;
+
+      window.scrollTo({ top: targetTop, behavior: "smooth" });
+    });
+  };
 
   return (
-    <section id="work" className="section">
+    <section id="work" className="section" ref={sectionRef}>
       <div className="container">
         <h2 className="headline-2 mb-8 reveal-up">Major projects</h2>
 
@@ -82,19 +99,28 @@ const Work = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {currentWorks.map(({ imgSrc, title, tags, projectLink }, key) => (
               <ProjectCard
-                key={key}
+                key={`${title}-${key}`}
                 imgSrc={imgSrc}
                 title={title}
                 tags={tags}
                 projectLink={projectLink}
               />
             ))}
+
+            {emptySlots > 0 &&
+              Array.from({ length: emptySlots }, (_, index) => (
+                <div
+                  key={`empty-slot-${index}`}
+                  className="invisible rounded-xl border border-zinc-700/40"
+                  aria-hidden="true"
+                />
+              ))}
           </div>
 
           <div className="flex items-center justify-center gap-2 mt-6">
             <button
               type="button"
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
@@ -109,7 +135,7 @@ const Work = () => {
                 <button
                   key={page}
                   type="button"
-                  onClick={() => setCurrentPage(page)}
+                  onClick={() => handlePageChange(page)}
                   className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${
                     isActive
                       ? "bg-sky-400 text-zinc-950"
@@ -124,7 +150,7 @@ const Work = () => {
             <button
               type="button"
               onClick={() =>
-                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                handlePageChange(Math.min(totalPages, currentPage + 1))
               }
               disabled={currentPage === totalPages}
               className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"

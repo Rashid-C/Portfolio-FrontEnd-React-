@@ -26,7 +26,7 @@ const Header = () => {
           </a>
         </div>
 
-        <div className={`relative md:justify-self-center md:top-0 `}>
+        <div className='relative md:justify-self-center md:top-0'>
           <button
             className='menu-btn md:hidden top-0 '
             onClick={() => setNavOpen((prev) => !prev)}
@@ -35,7 +35,7 @@ const Header = () => {
               {navOpen ? 'close' : 'menu'}
             </span>
           </button>
-          <Navbar navOpen={navOpen} />
+          <Navbar navOpen={navOpen} onNavigate={() => setNavOpen(false)} />
         </div>
 
         <a
@@ -50,5 +50,3 @@ const Header = () => {
 }
 
 export default Header
-
-
