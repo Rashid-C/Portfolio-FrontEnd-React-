@@ -4,72 +4,134 @@
  */
 
 /**
+ * Node modules
+ */
+import { useState } from "react";
+
+/**
  * Components
  */
 import ProjectCard from "./ProjectCard";
-import project1 from '../images/project-1.png'
-import project2 from '../images/project-2.png'
-import project3 from '../images/project-3.png'
-import project4 from '../images/project-4.png'
-import project5 from '../images/project-5.png'
-import project6 from '../images/project-6.png'
-
+import ecommerce from "../images/ecommerce.png";
+import project1 from "../images/project-1.png";
+import gocart from "../images/gocart.png";
+import project3 from "../images/project-3.png";
+import english from "../images/english.png";
+import kerala from "../images/kerala.png";
 
 const works = [
   {
     imgSrc: project1,
-    title: "Full stack blog app",
-    tags: ["API", "MVC", "Development"],
-    projectLink: "https://github.com/Rashid-C/mern-blog",
+    title: "MERN Blog - Blog Plateform",
+    tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
+    projectLink: "https://mern-stack-blog-plateform.vercel.app",
   },
   {
-    imgSrc: project2,
-    title: "React vite portfolio ",
-    tags: ["API", "GSAP", "Tailwind CSS"],
-    projectLink: "https://github.com/Rashid-C/Portfolios",
+    imgSrc: ecommerce,
+    title: "AZC Ecommerce - Admin Dashboard (UAE)",
+    tags: [
+      "Nextjs",
+      "Stripe&PayPal",
+      "Admin Dashboard",
+      "shadcn UI",
+      "fullstack",
+    ],
+    projectLink: "https://azc-ecom.vercel.app",
   },
   {
     imgSrc: project3,
-    title: "Modern school website",
-    tags: ["Development", "RestAPI", "Animation"],
-    projectLink: "https://github.com/Rashid-C/Professional_Education_Website",
+    title: "Rashid's Blog - CMS",
+    tags: ["MERN", "Google OAuth", "Admin Dashboard"],
+    projectLink: "https://github.com/Rashid-C/mern-blog",
   },
   {
-    imgSrc: project4,
-    title: "eCommerce website",
-    tags: ["Web-design", "Development", "Figma"],
-    projectLink: "https://github.com/Rashid-C/speed-ecommerce",
+    imgSrc: english,
+    title: "English Expert Coaching Platform",
+    tags: ["React.js", "Tailwind CSS", "Responsive UI"],
+    projectLink: "https://kerala-english-coach.vercel.app",
   },
   {
-    imgSrc: project5,
-    title: "Service website",
-    tags: ["IT", "Service"],
-    projectLink: "https://github.com/Rashid-C/Rashid_portfolio",
+    imgSrc: gocart,
+    title: "Multi Venter e-commerce",
+    tags: ["Next.js", "Tailwind CSS", "Responsive UI"],
+    projectLink: "https://nexuscart-alpha.vercel.app",
   },
-  {
-    imgSrc: project6,
-    title: "ToDo personal app",
-    tags: ["Web-design", "Development"],
-    projectLink: "https://github.com/Rashid-C/To-Do-App",
+   {
+    imgSrc: kerala,
+    title: "Bakery Store",
+    tags: ["React.js", "Tailwind CSS", "Responsive UI"],
+    projectLink: "https://keralabakery.netlify.app",
   },
 ];
 
+const ITEMS_PER_PAGE = 4;
+
 const Work = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(works.length / ITEMS_PER_PAGE);
+
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentWorks = works.slice(start, start + ITEMS_PER_PAGE);
+
   return (
     <section id="work" className="section">
       <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">My portfolio highlights</h2>
-        <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">
-          {works.map(({ imgSrc, title, tags, projectLink }, key) => (
-            <ProjectCard
-              key={key}
-              imgSrc={imgSrc}
-              title={title}
-              tags={tags}
-              projectLink={projectLink}
-              classes="reveal-up"
-            />
-          ))}
+        <h2 className="headline-2 mb-8 reveal-up">Major projects</h2>
+
+        <div className="reveal-up">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+            {currentWorks.map(({ imgSrc, title, tags, projectLink }, key) => (
+              <ProjectCard
+                key={key}
+                imgSrc={imgSrc}
+                title={title}
+                tags={tags}
+                projectLink={projectLink}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-2 mt-6">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Prev
+            </button>
+
+            {Array.from({ length: totalPages }, (_, index) => {
+              const page = index + 1;
+              const isActive = page === currentPage;
+
+              return (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => setCurrentPage(page)}
+                  className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${
+                    isActive
+                      ? "bg-sky-400 text-zinc-950"
+                      : "bg-zinc-800 hover:bg-zinc-700 text-zinc-100"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            })}
+
+            <button
+              type="button"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+              }
+              disabled={currentPage === totalPages}
+              className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </section>
