@@ -3,7 +3,7 @@
  * @license Apache-2.0
  */
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import SkillCard from './SkillCard'
 import figma from '../images/figma.svg'
 import css from '../images/css3.svg'
@@ -27,12 +27,6 @@ import Aouth from '../images/oauth_icon.png'
 import GitHub from '../images/github_icon.png'
 import redux from '../images/redux_icon.png'
 
-
-
-
-
-
-
 const skillItems = [
   { imgSrc: react, label: 'React.js', desc: 'Frontend Framework' },
   { imgSrc: next, label: 'Next.js 15', desc: 'SSR and SSG Apps' },
@@ -54,21 +48,37 @@ const skillItems = [
   { imgSrc: git, label: 'Git', desc: 'Version Control' },
   { imgSrc: stripe, label: 'Stripe and PayPal', desc: 'Payments Integration' },
   { imgSrc: Aouth, label: 'OAuth and JWT', desc: 'Secure Authentication' },
-    { imgSrc: GitHub, label: 'GitHub', desc: 'Secure version control' },
-
+  { imgSrc: GitHub, label: 'GitHub', desc: 'Secure version control' },
 ]
 
 const ITEMS_PER_PAGE = 8
 
 const Skill = () => {
   const [currentPage, setCurrentPage] = useState(1)
+  const sectionRef = useRef(null)
   const totalPages = Math.ceil(skillItems.length / ITEMS_PER_PAGE)
 
   const start = (currentPage - 1) * ITEMS_PER_PAGE
   const currentSkills = skillItems.slice(start, start + ITEMS_PER_PAGE)
+  const emptySlots = ITEMS_PER_PAGE - currentSkills.length
+
+  const handlePageChange = (nextPage) => {
+    setCurrentPage(nextPage)
+
+    requestAnimationFrame(() => {
+      if (!sectionRef.current) return
+      const headerOffset = 88
+      const targetTop =
+        sectionRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        headerOffset
+
+      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+    })
+  }
 
   return (
-    <section id='skills' className='section'>
+    <section id='skills' className='section' ref={sectionRef}>
       <div className='container'>
         <h2 className='headline-2 reveal-up'>Essential Tools I use</h2>
 
@@ -88,12 +98,21 @@ const Skill = () => {
                 classes='h-full'
               />
             ))}
+
+            {emptySlots > 0 &&
+              Array.from({ length: emptySlots }, (_, index) => (
+                <div
+                  key={`empty-skill-slot-${index}`}
+                  className='invisible rounded-xl border border-zinc-700/40'
+                  aria-hidden='true'
+                />
+              ))}
           </div>
 
           <div className='flex items-center justify-center gap-2 mt-6'>
             <button
               type='button'
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className='h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
             >
@@ -108,7 +127,7 @@ const Skill = () => {
                 <button
                   key={page}
                   type='button'
-                  onClick={() => setCurrentPage(page)}
+                  onClick={() => handlePageChange(page)}
                   className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${
                     isActive
                       ? 'bg-sky-400 text-zinc-950'
@@ -123,7 +142,7 @@ const Skill = () => {
             <button
               type='button'
               onClick={() =>
-                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                handlePageChange(Math.min(totalPages, currentPage + 1))
               }
               disabled={currentPage === totalPages}
               className='h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
