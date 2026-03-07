@@ -49,7 +49,7 @@ const App = () => {
   }, [])
 
   return (
-    <ReactLenis root>
+    <ReactLenis root options={{ lerp: 0.08, smoothWheel: true, syncTouch: true, touchMultiplier: 1.1 }}>
       <Header />
       <main>
         <Hero />
@@ -68,3 +68,4 @@ const App = () => {
 }
 
 export default App
+

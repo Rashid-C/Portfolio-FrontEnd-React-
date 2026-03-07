@@ -9,7 +9,7 @@
 import { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-const Navbar = ({ navOpen }) => {
+const Navbar = ({ navOpen, onNavigate }) => {
   const lastActiveLink = useRef()
   const activeBox = useRef()
   const navLinks = useRef([])
@@ -43,13 +43,27 @@ const Navbar = ({ navOpen }) => {
     activeBox.current.style.height = event.target.offsetHeight + 'px'
   }
 
+  const handleNavClick = (event, link) => {
+    event.preventDefault()
+    activeCurrentLink(event)
+
+    const target = document.querySelector(link)
+    if (target) {
+      const headerOffset = 88
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset
+      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+    }
+
+    onNavigate?.()
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const sections = document.querySelectorAll('section[id]')
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100
+        const sectionTop = section.offsetTop - 120
         const sectionHeight = section.offsetHeight
         const sectionId = section.getAttribute('id')
 
@@ -134,7 +148,7 @@ const Navbar = ({ navOpen }) => {
               if (ref) ref.current = el
             }
           }}
-          onClick={activeCurrentLink}
+          onClick={(event) => handleNavClick(event, link)}
         >
           {label}
         </a>
@@ -146,6 +160,7 @@ const Navbar = ({ navOpen }) => {
 
 Navbar.propTypes = {
   navOpen: PropTypes.bool.isRequired,
+  onNavigate: PropTypes.func,
 }
 
 export default Navbar

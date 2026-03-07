@@ -1,7 +1,7 @@
 const FloatingWhatsApp = () => {
   return (
     <a
-      href='https://wa.me/+917356958972'
+      href='https://wa.me/+918078967913'
       target='_blank'
       rel='noopener noreferrer'
       aria-label='Chat on WhatsApp'
