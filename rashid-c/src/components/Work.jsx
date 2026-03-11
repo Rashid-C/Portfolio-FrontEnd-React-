@@ -43,7 +43,9 @@ const works = [
       "shadcn UI",
       "fullstack",
     ],
-    projectLink: "https://azc-ecom.vercel.app",
+    projectLink: "https://azcstore.com",
+
+    // projectLink: "https://azc-ecom.vercel.app",
   },
   {
     imgSrc: project1,
