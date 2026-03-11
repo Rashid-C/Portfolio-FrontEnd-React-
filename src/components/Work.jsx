@@ -18,17 +18,24 @@ import gocart from "../images/gocart.png";
 import project3 from "../images/project-3.png";
 import english from "../images/english.png";
 import kerala from "../images/kerala.png";
+import mehara from "../images/mehara.png";
 
 const works = [
   {
-    imgSrc: project1,
-    title: "MERN Blog - Blog Plateform",
-    tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
-    projectLink: "https://mern-stack-blog-plateform.vercel.app",
+    imgSrc: mehara,
+    title: "Mehara Pardha Ecommerce -(UAE)",
+    tags: [
+      "Nextjs",
+      "Google OAuth",
+      "ecommerse",
+      "JWT Auth",
+      "Admin Dashboard",
+    ],
+    projectLink: "https://mehara.vercel.app",
   },
   {
     imgSrc: ecommerce,
-    title: "AZC Ecommerce - Admin Dashboard (UAE)",
+    title: "AZC Ecommerce  (UAE)",
     tags: [
       "Nextjs",
       "Stripe&PayPal",
@@ -39,11 +46,12 @@ const works = [
     projectLink: "https://azc-ecom.vercel.app",
   },
   {
-    imgSrc: project3,
-    title: "Rashid's Blog - CMS",
-    tags: ["MERN", "Google OAuth", "Admin Dashboard"],
-    projectLink: "https://github.com/Rashid-C/mern-blog",
+    imgSrc: project1,
+    title: "MERN Blog - Blog Plateform",
+    tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
+    projectLink: "https://mern-stack-blog-plateform.vercel.app",
   },
+
   {
     imgSrc: english,
     title: "English Expert Coaching Platform",
@@ -61,6 +69,13 @@ const works = [
     title: "Bakery Store",
     tags: ["React.js", "Tailwind CSS", "Responsive UI"],
     projectLink: "https://keralabakery.netlify.app",
+  },
+
+  {
+    imgSrc: project3,
+    title: "Rashid's Blog - CMS",
+    tags: ["MERN", "Google OAuth", "Admin Dashboard"],
+    projectLink: "https://github.com/Rashid-C/mern-blog",
   },
 ];
 
