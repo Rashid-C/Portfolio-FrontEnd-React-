@@ -19,8 +19,15 @@ import project3 from "../images/project-3.png";
 import english from "../images/english.png";
 import kerala from "../images/kerala.png";
 import mehara from "../images/mehara.png";
+import NIBX from "../images/nibx.png";
 
 const works = [
+  {
+    imgSrc: NIBX,
+    title: "NIBX-(USA)",
+    tags: ["React.js", "Vite", "Tailwind CSS", "Responsive UI", "Motion"],
+    projectLink: "https://nibx-us.vercel.app",
+  },
   {
     imgSrc: mehara,
     title: "Mehara Pardha Ecommerce -(UAE)",
@@ -153,11 +160,10 @@ const Work = () => {
                   key={page}
                   type="button"
                   onClick={() => handlePageChange(page)}
-                  className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${
-                    isActive
+                  className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${isActive
                       ? "bg-sky-400 text-zinc-950"
                       : "bg-zinc-800 hover:bg-zinc-700 text-zinc-100"
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
