@@ -49,6 +49,7 @@ const skillItems = [
   { imgSrc: redis, label: 'Redis Caching', desc: 'Performance Layer' },
 
   // Frontend styling and state
+  { imgSrc: react, label: 'React Native', desc: 'Cross-Platform Mobile Apps' },
   { imgSrc: tailwind, label: 'Tailwind CSS', desc: 'Modern UI Styling' },
   { imgSrc: css, label: 'CSS3', desc: 'Responsive UI' },
   { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
