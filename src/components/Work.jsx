@@ -142,6 +142,7 @@ const Work = () => {
                 title={title}
                 tags={tags}
                 projectLink={projectLink}
+                index={key}
               />
             ))}
 
