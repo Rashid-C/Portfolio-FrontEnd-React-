@@ -30,29 +30,40 @@ import python from '../images/python.svg'
 import django from '../images/django.svg'
 
 const skillItems = [
-  { imgSrc: react, label: 'React.js', desc: 'Frontend Framework' },
+  // Core stack, in the order it's presented on my LinkedIn headline
+  { imgSrc: django, label: 'Django REST Framework', desc: 'Backend Framework' },
   { imgSrc: next, label: 'Next.js 15', desc: 'SSR and SSG Apps' },
+  { imgSrc: react, label: 'React.js', desc: 'Frontend Framework' },
+  { imgSrc: node, label: 'Node.js', desc: 'Backend Runtime' },
+  { imgSrc: postgresql, label: 'PostgreSQL', desc: 'Relational Database' },
+
+  // Supporting languages and backend
+  { imgSrc: python, label: 'Python', desc: 'Programming Language' },
   { imgSrc: typescript, label: 'TypeScript', desc: 'Typed JavaScript' },
   { imgSrc: js, label: 'JavaScript ES6+', desc: 'Core Language' },
-  { imgSrc: tailwind, label: 'Tailwind CSS', desc: 'Modern UI Styling' },
-  { imgSrc: css, label: 'CSS3', desc: 'Responsive UI' },
-  { imgSrc: figma, label: 'Figma UI', desc: 'Design System' },
-  { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
-  { imgSrc: python, label: 'Python', desc: 'Programming Language' },
-  { imgSrc: django, label: 'Django REST Framework', desc: 'Backend Framework' },
-  { imgSrc: node, label: 'Node.js', desc: 'Backend Runtime' },
   { imgSrc: express, label: 'Express.js', desc: 'REST API Framework' },
+
+  // Data layer
   { imgSrc: mongodb, label: 'MongoDB Atlas', desc: 'NoSQL Database' },
-  { imgSrc: postgresql, label: 'PostgreSQL', desc: 'Relational Database' },
   { imgSrc: prisma, label: 'Prisma ORM', desc: 'Database ORM' },
   { imgSrc: redis, label: 'Redis Caching', desc: 'Performance Layer' },
+
+  // Frontend styling and state
+  { imgSrc: tailwind, label: 'Tailwind CSS', desc: 'Modern UI Styling' },
+  { imgSrc: css, label: 'CSS3', desc: 'Responsive UI' },
+  { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
+
+  // Security and payments
+  { imgSrc: Aouth, label: 'OAuth and JWT', desc: 'Secure Authentication' },
+  { imgSrc: stripe, label: 'Stripe and PayPal', desc: 'Payments Integration' },
+
+  // Infra and tooling
   { imgSrc: docker, label: 'Docker', desc: 'Containerization' },
   { imgSrc: aws, label: 'AWS S3 and EC2', desc: 'Cloud Services' },
   { imgSrc: vercel, label: 'Vercel', desc: 'Deployment Platform' },
   { imgSrc: git, label: 'Git', desc: 'Version Control' },
-  { imgSrc: stripe, label: 'Stripe and PayPal', desc: 'Payments Integration' },
-  { imgSrc: Aouth, label: 'OAuth and JWT', desc: 'Secure Authentication' },
   { imgSrc: GitHub, label: 'GitHub', desc: 'Secure version control' },
+  { imgSrc: figma, label: 'Figma UI', desc: 'Design System' },
 ]
 
 const ITEMS_PER_PAGE = 8
