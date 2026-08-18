@@ -26,6 +26,8 @@ import stripe from '../images/stripe_icon.png'
 import Aouth from '../images/oauth_icon.png'
 import GitHub from '../images/github_icon.png'
 import redux from '../images/redux_icon.png'
+import python from '../images/python.svg'
+import django from '../images/django.svg'
 
 const skillItems = [
   { imgSrc: react, label: 'React.js', desc: 'Frontend Framework' },
@@ -36,6 +38,8 @@ const skillItems = [
   { imgSrc: css, label: 'CSS3', desc: 'Responsive UI' },
   { imgSrc: figma, label: 'Figma UI', desc: 'Design System' },
   { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
+  { imgSrc: python, label: 'Python', desc: 'Programming Language' },
+  { imgSrc: django, label: 'Django REST Framework', desc: 'Backend Framework' },
   { imgSrc: node, label: 'Node.js', desc: 'Backend Runtime' },
   { imgSrc: express, label: 'Express.js', desc: 'REST API Framework' },
   { imgSrc: mongodb, label: 'MongoDB Atlas', desc: 'NoSQL Database' },

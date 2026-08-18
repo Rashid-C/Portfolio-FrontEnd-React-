@@ -47,7 +47,7 @@ const socials = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/rashid__rayhan/",
+    href: "https://www.instagram.com/rashidc.in",
   },
   {
     label: "CodePen",
@@ -64,9 +64,9 @@ const Footer = () => {
             <h2 className="headline-1 mb-8 lg:max-w-[12ch] reveal-up">
               Let&apos;s work together today!
             </h2>
-            <a href="https://github.com/Rashid-C">
+            <a href="mailto:anurashid11055@gmail.com">
               <ButtonPrimary
-                href="mailto:jsoanu@gmail.com"
+                href="mailto:anurashid11055@gmail.com"
                 label="Start project"
                 icon="chevron_right"
                 classes="reveal-up"

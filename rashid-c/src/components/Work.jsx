@@ -20,13 +20,27 @@ import english from "../images/english.png";
 import kerala from "../images/kerala.png";
 import mehara from "../images/mehara.png";
 import NIBX from "../images/nibx.png";
+import mptms from "../images/mptms.png";
+import polosysbooks from "../images/polosysbooks.png";
 
 const works = [
+  {
+    imgSrc: mptms,
+    title: "Mehar Pardha - Tailor Management (UAE)",
+    tags: ["Next.js", "Django REST Framework", "PostgreSQL", "JWT Auth"],
+    projectLink: "https://tmsmp.vercel.app/",
+  },
+  {
+    imgSrc: polosysbooks,
+    title: "Polosys Books - Multi-Tenant ERP (GCC)",
+    tags: ["Django REST Framework", "Multi-Tenant", "PostgreSQL", "SaaS"],
+    projectLink: "https://web.polosysbooks.com/login/",
+  },
   {
     imgSrc: NIBX,
     title: "NIBX-(USA)",
     tags: ["React.js", "Vite", "Tailwind CSS", "Responsive UI", "Motion"],
-    projectLink: "https://nibx-us.vercel.app",
+    projectLink: "https://www.thenibx.com/",
   },
   {
     imgSrc: mehara,
@@ -38,7 +52,7 @@ const works = [
       "JWT Auth",
       "Admin Dashboard",
     ],
-    projectLink: "https://mehara.vercel.app",
+    projectLink: "https://meharcollective.vercel.app/",
   },
   {
     imgSrc: ecommerce,
@@ -50,7 +64,7 @@ const works = [
       "shadcn UI",
       "fullstack",
     ],
-    projectLink: "https://azcstore.com",
+    projectLink: "https://www.azcstore.info/",
 
     // projectLink: "https://azc-ecom.vercel.app",
   },
@@ -58,7 +72,7 @@ const works = [
     imgSrc: project1,
     title: "MERN Blog - Blog Plateform",
     tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
-    projectLink: "https://mern-stack-blog-plateform.vercel.app",
+    projectLink: "https://bloganu.vercel.app/",
   },
 
   {
