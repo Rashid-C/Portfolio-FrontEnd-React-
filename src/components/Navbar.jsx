@@ -7,9 +7,11 @@
  * Node modules
  */
 import { useRef, useEffect } from 'react'
+import { useLenis } from 'lenis/react'
 import PropTypes from 'prop-types'
 
 const Navbar = ({ navOpen, onNavigate }) => {
+  const lenis = useLenis()
   const lastActiveLink = useRef()
   const activeBox = useRef()
   const navLinks = useRef([])
@@ -49,9 +51,7 @@ const Navbar = ({ navOpen, onNavigate }) => {
 
     const target = document.querySelector(link)
     if (target) {
-      const headerOffset = 88
-      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset
-      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+      lenis?.scrollTo(target, { offset: -88 })
     }
 
     onNavigate?.()

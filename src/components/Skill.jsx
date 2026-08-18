@@ -4,6 +4,7 @@
  */
 
 import { useRef, useState } from 'react'
+import { useLenis } from 'lenis/react'
 import SkillCard from './SkillCard'
 import figma from '../images/figma.svg'
 import css from '../images/css3.svg'
@@ -70,6 +71,7 @@ const skillItems = [
 const ITEMS_PER_PAGE = 8
 
 const Skill = () => {
+  const lenis = useLenis()
   const [currentPage, setCurrentPage] = useState(1)
   const sectionRef = useRef(null)
   const totalPages = Math.ceil(skillItems.length / ITEMS_PER_PAGE)
@@ -83,13 +85,7 @@ const Skill = () => {
 
     requestAnimationFrame(() => {
       if (!sectionRef.current) return
-      const headerOffset = 88
-      const targetTop =
-        sectionRef.current.getBoundingClientRect().top +
-        window.scrollY -
-        headerOffset
-
-      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+      lenis?.scrollTo(sectionRef.current, { offset: -88 })
     })
   }
 

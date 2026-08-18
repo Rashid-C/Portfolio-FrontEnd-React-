@@ -6,7 +6,8 @@
 /**
  * Node modules
  */
-import { ReactLenis } from 'lenis/react'
+import { useEffect } from 'react'
+import { ReactLenis, useLenis } from 'lenis/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -31,6 +32,40 @@ import Skill from './components/Skill'
 import Work from './components/Work'
 import Hero from './Hero'
 
+const HEADER_OFFSET = 88
+
+/**
+ * Routes every same-page anchor click (nav links, "Scroll down",
+ * footer sitemap, etc.) through Lenis instead of the browser's native
+ * smooth scroll, so the two don't fight over scroll position.
+ */
+const ScrollLinkHandler = () => {
+  const lenis = useLenis()
+
+  useEffect(() => {
+    const handleClick = (event) => {
+      if (event.defaultPrevented) return
+
+      const anchor = event.target.closest('a[href^="#"]')
+      if (!anchor) return
+
+      const id = anchor.getAttribute('href')
+      if (!id || id === '#') return
+
+      const target = document.querySelector(id)
+      if (!target) return
+
+      event.preventDefault()
+      lenis?.scrollTo(target, { offset: -HEADER_OFFSET })
+    }
+
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [lenis])
+
+  return null
+}
+
 const App = () => {
   useGSAP(() => {
     const elements = gsap.utils.toArray('.reveal-up')
@@ -49,7 +84,8 @@ const App = () => {
   }, [])
 
   return (
-    <ReactLenis root options={{ lerp: 0.08, smoothWheel: true, syncTouch: true, touchMultiplier: 1.1 }}>
+    <ReactLenis root options={{ lerp: 0.08, smoothWheel: true, touchMultiplier: 1.1 }}>
+      <ScrollLinkHandler />
       <Header />
       <main>
         <Hero />

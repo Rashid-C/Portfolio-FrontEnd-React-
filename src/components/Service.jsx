@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react'
+import { useLenis } from 'lenis/react'
 import { gsap } from 'gsap'
 
 const services = [
@@ -85,6 +86,7 @@ const iconStyles = [
 const ITEMS_PER_PAGE = 6
 
 const Service = () => {
+  const lenis = useLenis()
   const [currentPage, setCurrentPage] = useState(1)
   const sectionRef = useRef(null)
   const isFirstRender = useRef(true)
@@ -113,13 +115,7 @@ const Service = () => {
 
     requestAnimationFrame(() => {
       if (!sectionRef.current) return
-      const headerOffset = 88
-      const targetTop =
-        sectionRef.current.getBoundingClientRect().top +
-        window.scrollY -
-        headerOffset
-
-      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+      lenis?.scrollTo(sectionRef.current, { offset: -88 })
     })
   }
 
