@@ -98,8 +98,8 @@ const Skill = () => {
         <h2 className='headline-2 reveal-up'>Essential Tools I use</h2>
 
         <p className='text-zinc-400 mt-3 mb-8 max-w-[55ch] reveal-up'>
-          Updated from my latest resume: the technologies I use across
-          frontend, backend, databases, cloud, and integrations.
+          The technologies I use across frontend, backend, databases,
+          cloud, and integrations.
         </p>
 
         <div className='reveal-up'>

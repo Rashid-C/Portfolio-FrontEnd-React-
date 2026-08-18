@@ -21,7 +21,7 @@ const About = () => {
       <div className='container'>
         <div className='bg-zinc-800/50 p-7 rounded-2xl md:p-12 reveal-up'>
           <p className='text-zinc-300 mb-4 md:mb-8 md:text-xl md:max-w-[60ch]'>
-            Welcome! I&apos;m Rashid C, a full-stack developer (3+ years) working across Django/DRF, Next.js, React, Node.js, MongoDB, and PostgreSQL. I like finding where a system is slow or fragile and rebuilding it so it isn&apos;t &mdash; recently cutting a vendor-credit transaction from 110 seconds down to under a second by rebuilding the service layer with bulk database operations and a custom incremental FIFO engine. I&apos;m currently shipping production SaaS, ERP, and e-commerce platforms for businesses across the GCC and India.
+            I&apos;m Rashid C, a full-stack developer with 3+ years of experience across Django/DRF, Next.js, React, Node.js, MongoDB, and PostgreSQL. I specialize in identifying performance bottlenecks and architectural weaknesses, then re-engineering systems for scale and reliability &mdash; most recently reducing a vendor-credit transaction from 110 seconds to under a second by rebuilding the service layer with bulk database operations and a custom incremental FIFO engine. I currently build production-grade SaaS, ERP, and e-commerce platforms for businesses across the GCC and India.
           </p>
           <p className='sr-only'>Open to Software Developer roles in GCC, Dubai, Saudi Arabia, Kerala, and across India. Also searchable as Rashid, Rashidc, Rashid C, Rashid_C, Rashid-C, and rashidc___.</p>
           <div className='flex flex-wrap items-center gap-4 md:gap-7'>

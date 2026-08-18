@@ -34,7 +34,7 @@ const Hero = () => {
             </div>
           </div>
           <h1 className='headeline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-w-[15ch] mt-5 mb-8 lg:mb-10'>
-            Building Scalable Modern Websites for the Future
+            Engineering Scalable Full-Stack Systems
           </h1>
 
           <div className='lg:hidden mb-8'>
