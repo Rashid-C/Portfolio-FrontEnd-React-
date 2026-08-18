@@ -58,6 +58,30 @@ body {
   @apply translate-y-20 opacity-0
 }
 
+.glass-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--card-grad-from), var(--card-grad-to));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
 /* COMPONENTS */
 /* ------------------------------------------------------------------------------ */
 
