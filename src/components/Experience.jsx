@@ -3,6 +3,8 @@
  * @license Apache-2.0
  */
 
+import { useState } from 'react'
+
 const experiences = [
   {
     role: 'Back End Developer',
@@ -83,7 +85,23 @@ const experiences = [
   },
 ]
 
+const DEFAULT_VISIBLE = 3
+
 const Experience = () => {
+  const [expanded, setExpanded] = useState(() => new Set())
+
+  const toggleExpanded = (index) => {
+    setExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(index)) {
+        next.delete(index)
+      } else {
+        next.add(index)
+      }
+      return next
+    })
+  }
+
   return (
     <section id='experience' className='section'>
       <div className='container'>
@@ -94,48 +112,76 @@ const Experience = () => {
           user-focused web applications.
         </p>
 
-        <div className='grid gap-4 md:gap-5'>
-          {experiences.map(
-            ({ role, company, duration, location, highlights }, index) => (
-              <article
-                key={index}
-                className='reveal-up relative p-5 md:p-7 rounded-2xl bg-zinc-800 hover:bg-zinc-700/50 active:bg-zinc-700/60 ring-1 ring-inset ring-zinc-50/5 transition-colors'
-              >
-                <div className='absolute left-0 top-6 bottom-6 w-1 rounded-full bg-sky-400/80'></div>
+        <div className='relative'>
+          <div className='absolute left-[7px] top-2 bottom-2 w-px bg-zinc-700'></div>
 
-                <div className='pl-4'>
-                  <div className='flex flex-wrap items-start justify-between gap-3'>
-                    <div>
-                      <h3 className='title-1'>{role}</h3>
-                      <p className='text-zinc-300 mt-1'>
-                        {company}{' '}
-                        <span className='text-zinc-500'>- {location}</span>
+          <div className='space-y-10'>
+            {experiences.map(
+              ({ role, company, duration, location, highlights }, index) => {
+                const isExpanded = expanded.has(index)
+                const visibleHighlights = isExpanded
+                  ? highlights
+                  : highlights.slice(0, DEFAULT_VISIBLE)
+                const remaining = highlights.length - DEFAULT_VISIBLE
+
+                return (
+                  <article
+                    key={index}
+                    className='reveal-up relative pl-8 md:pl-10'
+                  >
+                    <span className='absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full bg-sky-400 ring-4 ring-zinc-900'></span>
+
+                    <div className='flex flex-wrap items-start justify-between gap-3'>
+                      <div>
+                        <h3 className='title-1'>{role}</h3>
+                        <p className='text-zinc-300 mt-1'>
+                          {company}{' '}
+                          <span className='text-zinc-500'>- {location}</span>
+                        </p>
+                      </div>
+
+                      <p className='h-8 text-sm text-zinc-200 bg-zinc-50/10 grid items-center px-3 rounded-lg'>
+                        {duration}
                       </p>
                     </div>
 
-                    <p className='h-8 text-sm text-zinc-200 bg-zinc-50/10 grid items-center px-3 rounded-lg'>
-                      {duration}
-                    </p>
-                  </div>
+                    <ul className='mt-4 space-y-2'>
+                      {visibleHighlights.map((item, itemIndex) => (
+                        <li
+                          key={itemIndex}
+                          className='text-sm md:text-base text-zinc-300 flex gap-2'
+                        >
+                          <span
+                            className='mt-2 h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0'
+                            aria-hidden='true'
+                          ></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                  <ul className='mt-4 space-y-2'>
-                    {highlights.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className='text-sm md:text-base text-zinc-300 flex gap-2'
+                    {remaining > 0 && (
+                      <button
+                        type='button'
+                        onClick={() => toggleExpanded(index)}
+                        className='mt-3 text-sm text-sky-400 hover:text-sky-300 transition-colors inline-flex items-center gap-1'
                       >
+                        {isExpanded ? 'Show less' : `Show ${remaining} more`}
                         <span
-                          className='mt-2 h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0'
+                          className={`material-symbols-rounded text-[18px] transition-transform ${
+                            isExpanded ? 'rotate-180' : ''
+                          }`}
                           aria-hidden='true'
-                        ></span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            )
-          )}
+                        >
+                          expand_more
+                        </span>
+                      </button>
+                    )}
+                  </article>
+                )
+              }
+            )}
+          </div>
         </div>
       </div>
     </section>
