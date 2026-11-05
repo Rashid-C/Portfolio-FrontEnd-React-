@@ -112,7 +112,7 @@ const Service = () => {
                 <article
                   key={title}
                   style={{ '--card-grad-from': style.gradFrom, '--card-grad-to': style.gradTo }}
-                  className='glass-card group relative p-4 rounded-2xl bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.05] ring-1 ring-inset ring-white/10 transition-[background-color,transform] hover:-translate-y-0.5'
+                  className='glass-card group relative p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.05] ring-1 ring-inset ring-white/10 transition-[background-color,transform] hover:-translate-y-0.5'
                 >
                   <div
                     className={`absolute -top-6 -right-4 w-20 h-20 rounded-full blur-2xl bg-gradient-to-br ${style.halo} pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500`}

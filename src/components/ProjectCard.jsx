@@ -26,12 +26,12 @@ const ProjectCard = ({ project, index = 0 }) => {
   return (
     <div
       style={{ '--card-grad-from': style.from, '--card-grad-to': style.to }}
-      className='glass-card group relative h-full p-4 rounded-2xl bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.05] ring-1 ring-inset ring-white/10 transition-[background-color,transform] hover:-translate-y-0.5'
+      className='glass-card group relative h-full p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.05] ring-1 ring-inset ring-white/10 transition-[background-color,transform] hover:-translate-y-0.5'
     >
       <figure className='img-box aspect-video rounded-lg mb-4'>
         <Image
           src={imgSrc}
-          alt={title}
+          alt={`${title} screenshot`}
           sizes='(min-width: 1024px) 260px, (min-width: 640px) 45vw, 50vw'
           placeholder='blur'
           className='img-cover'

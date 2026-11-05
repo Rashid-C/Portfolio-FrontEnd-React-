@@ -5,7 +5,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
@@ -14,6 +14,26 @@ import logo from '@/images/logo-rc.svg'
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false)
+  const menuRef = useRef(null)
+
+  // Close the phone menu on a tap outside it, or with the Escape key.
+  useEffect(() => {
+    if (!navOpen) return
+
+    const handlePointerDown = (event) => {
+      if (!menuRef.current?.contains(event.target)) setNavOpen(false)
+    }
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setNavOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navOpen])
 
   return (
     <header className='fixed top-0 left-0 w-full h-20 flex items-center z-40 bg-gradient-to-b from-zinc-900 to-zinc-900/0'>
@@ -24,7 +44,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className='relative md:justify-self-center md:top-0'>
+        <div ref={menuRef} className='relative md:justify-self-center md:top-0'>
           <button
             type='button'
             className='menu-btn md:hidden top-0'

@@ -25,6 +25,9 @@ export const projects = [
     caseStudy: {
       name: 'NezeX One',
       headline: 'A multi-tenant cloud ERP, live in the UAE',
+      seoTitle: 'NezeX One: Multi-Tenant Cloud ERP Case Study',
+      seoDescription:
+        'How Rashid C built NezeX One, a multi-tenant cloud ERP live in the UAE, with UAE VAT invoicing, role-based access and 527 automated tests.',
       summary:
         'NezeX One is live in production in the UAE and used daily by its client. Sales, purchases, inventory and reporting share one customer list and one set of numbers, in English and Arabic, ready for UAE VAT.',
       role: 'Sole engineer: development, deployment, hosting and production support',
@@ -58,6 +61,9 @@ export const projects = [
     caseStudy: {
       name: 'Al Fath',
       headline: 'A practice management system for an Abu Dhabi accounting and tax firm',
+      seoTitle: 'Al Fath: Accounting Firm System Case Study',
+      seoDescription:
+        'A bilingual website and staff system for an Abu Dhabi accounting firm, built with NestJS and PostgreSQL, with audit logs and 250+ tests.',
       summary:
         'Al Fath gives the firm a bilingual English and Arabic public website and a staff system for running its client work, built so the records can be trusted.',
       role: 'Built end to end with Claude Code',
@@ -88,6 +94,9 @@ export const projects = [
     caseStudy: {
       name: 'AZC E-commerce',
       headline: 'A production online store for customers across the GCC',
+      seoTitle: 'AZC E-commerce: Online Store Case Study',
+      seoDescription:
+        'A production e-commerce store for GCC customers, built with Next.js, Node.js and MongoDB, with Stripe and PayPal checkout and an OpenAI feature.',
       summary:
         'I own the production e-commerce website for AZC Electronics Trading LLC, from checkout and order handling to search visibility and an OpenAI-powered customer engagement feature.',
       role: 'Owner of the full stack',
@@ -113,6 +122,9 @@ export const projects = [
     caseStudy: {
       name: 'Polosys Books',
       headline: 'Making a multi-tenant SaaS ERP dramatically faster',
+      seoTitle: 'Polosys Books: SaaS ERP Speed Case Study',
+      seoDescription:
+        'How Rashid C cut a multi-tenant ERP transaction from 110 seconds to 0.8 seconds with bulk database operations and a custom FIFO engine.',
       summary:
         'Polosys Books is a multi-tenant SaaS ERP serving the GCC and Saudi Arabia market. I joined on contract and rebuilt the slow transaction paths that were holding up daily accounting work.',
       role: 'Back End Developer (Contract)',

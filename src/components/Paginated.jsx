@@ -3,6 +3,7 @@
 import { Children, useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import { gsap } from '@/lib/gsap'
+import { scrollToSection } from '@/lib/scroll'
 
 /**
  * Shows server-rendered cards one page at a time.
@@ -41,7 +42,7 @@ const Paginated = ({ children, perPage, gridClassName, label }) => {
 
     requestAnimationFrame(() => {
       const section = gridRef.current?.closest('section')
-      if (section) lenis?.scrollTo(section, { offset: -88 })
+      if (section) scrollToSection(lenis, section)
     })
   }
 

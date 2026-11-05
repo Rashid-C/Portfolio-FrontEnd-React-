@@ -8,6 +8,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useLenis } from 'lenis/react'
+import { SECTION_NAV_EVENT } from '@/lib/scroll'
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
@@ -19,7 +21,8 @@ const NAV_ITEMS = [
   { label: 'Contact', id: 'contact', mobileOnly: true },
 ]
 
-const SCROLL_OFFSET = 120
+/** Sections with no nav link of their own highlight the link before them. */
+const HIGHLIGHT_FOR = { skills: 'services' }
 
 const Navbar = ({ navOpen, onNavigate }) => {
   const pathname = usePathname()
@@ -27,34 +30,55 @@ const Navbar = ({ navOpen, onNavigate }) => {
   const [scrolledTo, setScrolledTo] = useState('home')
   const links = useRef({})
   const activeBox = useRef(null)
+  const sectionInView = useRef('home')
+  const isNavScrolling = useRef(false)
 
   // Only the home page has sections to highlight.
   const activeId = isHome ? scrolledTo : null
 
-  // Track the section in view. Sections with no visible nav link (Skills, and
-  // Contact on desktop) keep the previous section highlighted.
+  // When a link's scroll finishes (or the visitor takes over with the wheel),
+  // go back to following the section in view.
+  const lenis = useLenis((instance) => {
+    if (!isNavScrolling.current || instance.isScrolling) return
+
+    isNavScrolling.current = false
+    setTimeout(() => setScrolledTo(sectionInView.current), 100)
+  })
+
+  // Highlight the destination straight away, instead of flickering through
+  // every section the page passes on the way there.
+  useEffect(() => {
+    const handleSectionNav = ({ detail: id }) => {
+      isNavScrolling.current = Boolean(lenis?.isScrolling)
+      if (links.current[id]?.offsetWidth) setScrolledTo(id)
+    }
+
+    window.addEventListener(SECTION_NAV_EVENT, handleSectionNav)
+    return () => window.removeEventListener(SECTION_NAV_EVENT, handleSectionNav)
+  }, [lenis])
+
+  // Track the section crossing a thin band near the top of the screen. An
+  // observer needs no work on every scroll event, which keeps scrolling smooth.
   useEffect(() => {
     if (!isHome) return
 
-    const handleScroll = () => {
-      let current = 'home'
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
 
-      for (const { id } of NAV_ITEMS) {
-        const section = document.getElementById(id)
-        if (!section || !links.current[id]?.offsetWidth) continue
-        if (window.scrollY >= section.offsetTop - SCROLL_OFFSET) current = id
-      }
+          const id = HIGHLIGHT_FOR[entry.target.id] ?? entry.target.id
+          if (!links.current[id]?.offsetWidth) continue
 
-      setScrolledTo(current)
-    }
+          sectionInView.current = id
+          if (!isNavScrolling.current) setScrolledTo(id)
+        }
+      },
+      { rootMargin: '-15% 0px -84% 0px' }
+    )
 
-    const frame = requestAnimationFrame(handleScroll)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', handleScroll)
-    }
+    document.querySelectorAll('section[id]').forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [isHome])
 
   // Move the white highlight behind the active link.

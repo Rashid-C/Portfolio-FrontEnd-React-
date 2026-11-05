@@ -27,7 +27,7 @@ const inter = Inter({
 })
 
 const OG_DESCRIPTION =
-  'Full Stack Engineer in the UAE, available immediately. Sole engineer of NezeX One, a multi-tenant cloud ERP live in the UAE. Next.js, Node.js, NestJS, Django, PostgreSQL, AWS.'
+  'Full Stack Engineer in the UAE, available immediately. Sole engineer of NezeX One, a multi-tenant cloud ERP live in the UAE.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,36 +36,31 @@ export const metadata = {
     template: '%s | Rashid C',
   },
   description: SITE_DESCRIPTION,
-  keywords: [
-    'Rashid C',
-    'Rashidc',
-    'Rashid-C',
-    'full stack engineer Dubai',
-    'full stack developer UAE',
-    'Next.js developer Dubai',
-    'Node.js developer UAE',
-    'NestJS developer',
-    'Django developer Dubai',
-    'ERP developer UAE',
-    'software engineer Abu Dhabi',
-    'immediate joiner Dubai',
-  ],
   authors: [{ name: 'Rashid C', url: SITE_URL }],
   creator: 'Rashid C',
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     type: 'profile',
     locale: 'en_US',
     siteName: SITE_NAME,
     url: '/',
-    title: 'Rashid C | Full Stack Engineer in Dubai, UAE',
+    title: SITE_TITLE,
     description: OG_DESCRIPTION,
   },
   twitter: {
     card: 'summary_large_image',
     site: '@rashidc_in',
     creator: '@rashidc_in',
-    title: 'Rashid C | Full Stack Engineer in Dubai, UAE',
+    title: SITE_TITLE,
     description: OG_DESCRIPTION,
   },
 }

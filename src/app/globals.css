@@ -8,22 +8,23 @@ body {
   @apply bg-zinc-900 text-zinc-50;
 }
 
-/* Section links land below the fixed header */
-section[id] {
-  scroll-margin-top: 88px;
+/* Links from other pages land like the home page's smooth scroll does: content
+   just below the fixed header, with the previous section out of view. */
+@media (min-width: 1024px) {
+  .section {
+    scroll-margin-top: -24px;
+  }
+}
+
+/* Sections take focus after a nav jump; that needs no visible ring. */
+section:focus {
+  outline: none;
 }
 
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid #38bdf8;
   outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-up {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* TYPOGRAPHY */
@@ -69,6 +70,14 @@ button:focus-visible {
   @apply translate-y-20 opacity-0
 }
 
+/* Must come after .reveal-up, or that rule wins and the content stays hidden. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .glass-card {
   position: relative;
   isolation: isolate;
@@ -100,33 +109,19 @@ button:focus-visible {
 
 .menu-btn {
   @apply w-10 h-10 grid place-items-center
-   bg-zinc-50/10 rounded-xl ring-inset ring-1
-    ring-zinc-50/[0.02] backdrop-blur-2xl hover:bg-zinc-50/15 
+   bg-[#2f2f32] rounded-xl ring-inset ring-1
+    ring-zinc-50/[0.02] hover:bg-[#3a3a3d]
     transition-[transform,background-color] active:scale-95;
 }
 
 /* 2 Navbar */
 
-/* .navbar {
-  @apply absolute top-full mt-2 right-0 min-w-40 p-2
-   bg-zinc-50/10 rounded-2xl ring-inset ring-1 ring-zinc-50/5
-    scale-90 isolate blur-sm opacity-0 invisible 
-    transition-[opacity,transform,filter] 
-    md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 
-     md:visible md:scale-100
-    backdrop-blur-2xl;
-}
-
-.navbar.active {
-  @apply opacity-100 scale-100 blur-0 visible;
-} */
-
 .navbar {
-  @apply absolute top-full right-0 min-w-40 p-2 bg-zinc-50/10 rounded-2xl 
+  @apply absolute top-full right-0 min-w-40 p-2 bg-[#2f2f32]/95 rounded-2xl 
     ring-inset ring-1 ring-zinc-50/5 scale-90 isolate blur-sm opacity-0 invisible 
     transition-[opacity,transform,filter] 
     md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 
-    md:visible md:scale-100 backdrop-blur-2xl;
+    md:visible md:scale-100;
 }
 
 .navbar.active {
@@ -140,17 +135,12 @@ button:focus-visible {
 }
 
 .nav-link.active {
-  @apply text-zinc-900 duration-500;
+  @apply text-zinc-900 duration-300;
 }
-
-/* top-2 left-2 right-2 h-9 */
-/* .navbar .active-box {
-  @apply absolute   bg-zinc-50 rounded-lg -z-10 transition-[top,left] duration-500;
-} */
 
 .navbar .active-box {
   @apply absolute top-2 left-2 right-2 h-9 bg-zinc-50 rounded-lg -z-10 opacity-0
-  transition-[top,left] duration-500;
+  transition-[top,left,width] duration-300 ease-out;
 }
 
 /* Before JavaScript has placed the sliding box, the active link draws its own highlight */

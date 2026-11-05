@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import JsonLd from '@/components/JsonLd'
 import Ledger from '@/components/Ledger'
 import { caseStudies, getCaseStudy } from '@/data/projects'
-import { SITE_NAME, SITE_URL } from '@/data/site'
+import { personReference, SITE_NAME, SITE_URL } from '@/data/site'
 
 /** Only the case studies below exist; any other slug is a 404. */
 export const dynamicParams = false
@@ -20,13 +20,12 @@ export async function generateMetadata({ params }) {
   const project = getCaseStudy(slug)
   if (!project) return {}
 
-  const { name, headline, summary } = project.caseStudy
-  const title = `${name}: ${headline}`
+  const { seoTitle: title, seoDescription: description } = project.caseStudy
   const url = `/projects/${slug}`
 
   return {
     title,
-    description: summary,
+    description,
     alternates: { canonical: url },
     openGraph: {
       type: 'article',
@@ -34,14 +33,14 @@ export async function generateMetadata({ params }) {
       siteName: SITE_NAME,
       url,
       title,
-      description: summary,
+      description,
     },
     twitter: {
       card: 'summary_large_image',
       site: '@rashidc_in',
       creator: '@rashidc_in',
       title,
-      description: summary,
+      description,
     },
   }
 }
@@ -69,13 +68,25 @@ export default async function ProjectPage({ params }) {
       <JsonLd
         data={{
           '@context': 'https://schema.org',
-          '@type': 'CreativeWork',
-          name,
-          headline,
-          description: summary,
-          url: `${SITE_URL}/projects/${slug}`,
-          keywords: stack.join(', '),
-          author: { '@type': 'Person', name: 'Rashid C', url: `${SITE_URL}/` },
+          '@graph': [
+            {
+              '@type': 'CreativeWork',
+              name,
+              headline,
+              description: summary,
+              url: `${SITE_URL}/projects/${slug}`,
+              image: `${SITE_URL}/projects/${slug}/opengraph-image`,
+              keywords: stack.join(', '),
+              author: personReference,
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+                { '@type': 'ListItem', position: 2, name, item: `${SITE_URL}/projects/${slug}` },
+              ],
+            },
+          ],
         }}
       />
 

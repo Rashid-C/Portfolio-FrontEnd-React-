@@ -74,13 +74,6 @@ const About = () => {
               classes='self-start lg:border-l lg:border-zinc-700/60 lg:pl-14'
             />
           </div>
-
-          <p className='sr-only'>
-            Full Stack Engineer in Dubai, UAE, available immediately. Open to
-            Full Stack, Backend and Software Engineer roles in Dubai, Abu Dhabi,
-            Sharjah and across the GCC. Also searchable as Rashid, Rashidc,
-            Rashid C, Rashid_C, Rashid-C, and rashidc___.
-          </p>
         </div>
       </div>
     </section>

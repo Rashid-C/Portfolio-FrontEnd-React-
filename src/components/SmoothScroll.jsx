@@ -4,8 +4,24 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { ReactLenis, useLenis } from 'lenis/react'
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
+import { scrollToSection, SECTION_NAV_EVENT } from '@/lib/scroll'
 
-const HEADER_OFFSET = 88
+/** Runs Lenis and GSAP on one animation clock, so they never disagree about the scroll position. */
+const SharedClock = () => {
+  const lenis = useLenis(ScrollTrigger.update)
+
+  useEffect(() => {
+    if (!lenis) return
+
+    const tick = (time) => lenis.raf(time * 1000)
+    gsap.ticker.add(tick)
+    gsap.ticker.lagSmoothing(0)
+
+    return () => gsap.ticker.remove(tick)
+  }, [lenis])
+
+  return null
+}
 
 /**
  * On the home page, section links ("/#about", etc.) scroll smoothly through
@@ -38,11 +54,12 @@ const SectionLinks = () => {
       if (!target) return
 
       event.preventDefault()
-      if (lenis) {
-        lenis.scrollTo(target, { offset: -HEADER_OFFSET })
-      } else {
-        target.scrollIntoView()
-      }
+      scrollToSection(lenis, target)
+      window.dispatchEvent(new CustomEvent(SECTION_NAV_EVENT, { detail: target.id }))
+
+      // Keyboard users continue tabbing from the section they jumped to.
+      target.setAttribute('tabindex', '-1')
+      target.focus({ preventScroll: true })
     }
 
     document.addEventListener('click', handleClick, true)
@@ -64,7 +81,7 @@ const RevealOnScroll = () => {
           gsap.to(batch, {
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.6,
             ease: 'power2.out',
             // A jump to a section reveals everything above it at once, so cap
             // the total stagger or the section you landed on appears last.
@@ -82,8 +99,10 @@ const SmoothScroll = ({ children }) => {
   return (
     <ReactLenis
       root
+      autoRaf={false}
       options={{ lerp: 0.08, smoothWheel: true, touchMultiplier: 1.1 }}
     >
+      <SharedClock />
       <SectionLinks />
       <RevealOnScroll />
       {children}

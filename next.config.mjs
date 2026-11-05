@@ -22,6 +22,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: '(www\\.)?rashidc\\.site' }],
+        destination: 'https://www.rashidc.in/:path*',
+        permanent: true,
+      },
       { source: '/resume', destination: CV_PATH, permanent: false },
       { source: '/cv', destination: CV_PATH, permanent: false },
     ]

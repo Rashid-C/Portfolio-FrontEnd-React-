@@ -27,14 +27,14 @@ const Hero = () => {
             </div>
           </div>
 
-          <h1 className='headeline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-w-[15ch] mt-5 mb-4'>
+          <p className='headeline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-w-[15ch] mt-5 mb-4'>
             Engineering Scalable Full-Stack Systems
-          </h1>
-
-          <p className='text-zinc-400 md:text-lg max-w-[42ch] mb-8 lg:mb-10'>
-            Rashid C &mdash; Full Stack Engineer building ERP, SaaS and
-            e-commerce systems with Next.js, Node.js, Django and PostgreSQL.
           </p>
+
+          <h1 className='text-zinc-400 font-normal md:text-lg max-w-[42ch] mb-8 lg:mb-10'>
+            Rashid C &mdash; Full Stack Engineer in Dubai, building ERP, SaaS
+            and e-commerce systems with Next.js, Node.js, Django and PostgreSQL.
+          </h1>
         </div>
 
         <figure className='w-full max-w-[320px] mx-auto mb-8 bg-gradient-to-t from-sky-400 via-sky-400 to-65% rounded-[40px] overflow-hidden ring-2 ring-sky-300/30 shadow-[0_0_40px_rgba(56,189,248,0.35)] lg:col-start-2 lg:row-start-1 lg:row-span-4 lg:max-w-[480px] lg:mb-0 lg:ml-auto lg:mr-0 lg:self-center lg:rounded-[60px] lg:ring-sky-300/20 lg:shadow-[0_0_48px_rgba(56,189,248,0.28)]'>
