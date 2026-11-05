@@ -66,7 +66,7 @@ export const projects = [
         'A bilingual website and staff system for an Abu Dhabi accounting firm, built with NestJS and PostgreSQL, with audit logs and 250+ tests.',
       summary:
         'Al Fath gives the firm a bilingual English and Arabic public website and a staff system for running its client work, built so the records can be trusted.',
-      role: 'Built end to end with Claude Code',
+      role: 'Full Stack Engineer',
       company: 'AZC Electronics Trading LLC',
       period: '2026',
       linkLabel: 'See Al Fath live',
@@ -82,7 +82,7 @@ export const projects = [
         'Hardened access with login rate limiting, strict origin checks and least-privilege database roles.',
         'Wrote 250+ Vitest tests, plus backup and restore scripts.',
       ],
-      stack: ['NestJS', 'PostgreSQL', 'Prisma', 'Next.js', 'TypeScript', 'Vitest'],
+      stack: ['NestJS', 'PostgreSQL', 'Prisma', 'Next.js', 'TypeScript', 'Vitest', 'Claude Code'],
     },
   },
   {
@@ -99,7 +99,7 @@ export const projects = [
         'A production e-commerce store for GCC customers, built with Next.js, Node.js and MongoDB, with Stripe and PayPal checkout and an OpenAI feature.',
       summary:
         'I own the production e-commerce website for AZC Electronics Trading LLC, from checkout and order handling to search visibility and an OpenAI-powered customer engagement feature.',
-      role: 'Owner of the full stack',
+      role: 'Full Stack Engineer',
       company: 'AZC Electronics Trading LLC',
       period: 'Jan 2026 - Present',
       linkLabel: 'See the store live',
