@@ -82,7 +82,7 @@ export const projects = [
         'Hardened access with login rate limiting, strict origin checks and least-privilege database roles.',
         'Wrote 250+ Vitest tests, plus backup and restore scripts.',
       ],
-      stack: ['NestJS', 'PostgreSQL', 'Prisma', 'Next.js', 'TypeScript', 'Vitest', 'Claude Code'],
+      stack: ['NestJS', 'PostgreSQL', 'Prisma', 'Next.js', 'TypeScript', 'Vitest'],
     },
   },
   {
