@@ -3,165 +3,109 @@
  * @license Apache-2.0
  */
 
-/**
- * Node modules
- */
-import { useRef, useEffect } from 'react'
-import { useLenis } from 'lenis/react'
-import PropTypes from 'prop-types'
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+const NAV_ITEMS = [
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Services', id: 'services' },
+  { label: 'Work', id: 'work' },
+  { label: 'Experience', id: 'experience' },
+  { label: 'Reviews', id: 'reviews' },
+  { label: 'Contact', id: 'contact', mobileOnly: true },
+]
+
+const SCROLL_OFFSET = 120
 
 const Navbar = ({ navOpen, onNavigate }) => {
-  const lenis = useLenis()
-  const lastActiveLink = useRef()
-  const activeBox = useRef()
-  const navLinks = useRef([])
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const [scrolledTo, setScrolledTo] = useState('home')
+  const links = useRef({})
+  const activeBox = useRef(null)
 
-  const initActiveBox = () => {
-    if (!activeBox.current || !lastActiveLink.current) return
+  // Only the home page has sections to highlight.
+  const activeId = isHome ? scrolledTo : null
 
-    activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px'
-    activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px'
-    activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px'
-    activeBox.current.style.height = lastActiveLink.current.offsetHeight + 'px'
-  }
-
+  // Track the section in view. Sections with no visible nav link (Skills, and
+  // Contact on desktop) keep the previous section highlighted.
   useEffect(() => {
-    initActiveBox()
-    window.addEventListener('resize', initActiveBox)
+    if (!isHome) return
 
-    return () => window.removeEventListener('resize', initActiveBox)
-  }, [])
-
-  const activeCurrentLink = (event) => {
-    if (!activeBox.current) return
-
-    lastActiveLink.current?.classList.remove('active')
-    event.target.classList.add('active')
-    lastActiveLink.current = event.target
-
-    activeBox.current.style.top = event.target.offsetTop + 'px'
-    activeBox.current.style.left = event.target.offsetLeft + 'px'
-    activeBox.current.style.width = event.target.offsetWidth + 'px'
-    activeBox.current.style.height = event.target.offsetHeight + 'px'
-  }
-
-  const handleNavClick = (event, link) => {
-    event.preventDefault()
-    activeCurrentLink(event)
-
-    const target = document.querySelector(link)
-    if (target) {
-      lenis?.scrollTo(target, { offset: -88 })
-    }
-
-    onNavigate?.()
-  }
-
-  useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      const sections = document.querySelectorAll('section[id]')
+      let current = 'home'
 
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 120
-        const sectionHeight = section.offsetHeight
-        const sectionId = section.getAttribute('id')
+      for (const { id } of NAV_ITEMS) {
+        const section = document.getElementById(id)
+        if (!section || !links.current[id]?.offsetWidth) continue
+        if (window.scrollY >= section.offsetTop - SCROLL_OFFSET) current = id
+      }
 
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          const activeLink = navLinks.current.find(
-            (link) => link.getAttribute('href') === `#${sectionId}`
-          )
-
-          // Sections without a nav link (e.g. #skills) keep the previous
-          // highlight instead of leaving an empty white pill behind.
-          if (activeLink && activeBox.current) {
-            navLinks.current.forEach((link) => link.classList.remove('active'))
-            activeLink.classList.add('active')
-            lastActiveLink.current = activeLink
-
-            activeBox.current.style.top = activeLink.offsetTop + 'px'
-            activeBox.current.style.left = activeLink.offsetLeft + 'px'
-            activeBox.current.style.width = activeLink.offsetWidth + 'px'
-            activeBox.current.style.height = activeLink.offsetHeight + 'px'
-          }
-        }
-      })
+      setScrolledTo(current)
     }
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
+    const frame = requestAnimationFrame(handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isHome])
 
-  const navItems = [
-    {
-      label: 'Home',
-      link: '#home',
-      className: 'nav-link active',
-      ref: lastActiveLink,
-    },
-    {
-      label: 'About',
-      link: '#about',
-      className: 'nav-link',
-    },
-    {
-      label: 'Services',
-      link: '#services',
-      className: 'nav-link',
-    },
-    {
-      label: 'Work',
-      link: '#work',
-      className: 'nav-link',
-    },
-    {
-      label: 'Experience',
-      link: '#experience',
-      className: 'nav-link',
-    },
-    {
-      label: 'Reviews',
-      link: '#reviews',
-      className: 'nav-link',
-    },
-    {
-      label: 'Contact',
-      link: '#contact',
-      className: 'nav-link md:hidden',
-    },
-  ]
+  // Move the white highlight behind the active link.
+  useEffect(() => {
+    const placeBox = () => {
+      const box = activeBox.current
+      if (!box) return
+
+      const link = activeId ? links.current[activeId] : null
+      if (!link?.offsetWidth) {
+        box.style.opacity = '0'
+        return
+      }
+
+      box.style.opacity = '1'
+      box.style.top = `${link.offsetTop}px`
+      box.style.left = `${link.offsetLeft}px`
+      box.style.width = `${link.offsetWidth}px`
+      box.style.height = `${link.offsetHeight}px`
+      // From here the sliding box takes over from the link's own CSS highlight.
+      box.parentElement.dataset.ready = 'true'
+    }
+
+    placeBox()
+    document.fonts?.ready.then(placeBox)
+    window.addEventListener('resize', placeBox)
+
+    return () => window.removeEventListener('resize', placeBox)
+  }, [activeId])
 
   return (
-    <nav className={`navbar ${navOpen ? 'active' : ''}`}>
-      {navItems.map(({ label, link, className, ref }, key) => (
-        <a
-          href={link}
-          className={`${className} `}
-          key={key}
-          ref={(el) => {
-            if (el) {
-              navLinks.current[key] = el
-              if (ref) ref.current = el
-            }
+    <nav aria-label='Main' className={`navbar ${navOpen ? 'active' : ''}`}>
+      {NAV_ITEMS.map(({ label, id, mobileOnly }) => (
+        <Link
+          key={id}
+          href={`/#${id}`}
+          ref={(element) => {
+            links.current[id] = element
           }}
-          onClick={(event) => handleNavClick(event, link)}
+          onClick={onNavigate}
+          aria-current={activeId === id ? 'true' : undefined}
+          className={`nav-link ${mobileOnly ? 'md:hidden' : ''} ${
+            activeId === id ? 'active' : ''
+          }`}
         >
           {label}
-        </a>
+        </Link>
       ))}
       <div className='active-box' ref={activeBox}></div>
     </nav>
   )
-}
-
-Navbar.propTypes = {
-  navOpen: PropTypes.bool.isRequired,
-  onNavigate: PropTypes.func,
 }
 
 export default Navbar

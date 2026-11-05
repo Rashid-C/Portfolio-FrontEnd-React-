@@ -3,11 +3,11 @@
  * @license Apache-2.0
  */
 
-/**
- * Track record, laid out like line items on an invoice:
- * label on the left, a dotted leader, the figure on the right.
- */
-const ledger = [
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
+import Ledger from './Ledger'
+
+const trackRecord = [
   { label: 'Years shipping software', value: '4+' },
   { label: 'Projects delivered', value: '45+' },
   { label: 'Tests on NezeX One', value: '527' },
@@ -42,40 +42,37 @@ const About = () => {
                 numbers right.
               </p>
 
-              <a
-                href='https://nezexone.com/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-2.5 rounded-lg px-3.5 h-10 text-sm text-zinc-200 bg-zinc-50/5 ring-1 ring-inset ring-zinc-50/10 transition-colors hover:bg-zinc-50/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400'
-              >
-                <span className='relative w-2 h-2 rounded-full bg-emerald-400'>
-                  <span className='absolute inset-0 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none'></span>
-                </span>
-                See NezeX One live
-                <span
-                  className='material-symbols-rounded text-[18px] text-zinc-400'
-                  aria-hidden='true'
+              <div className='flex flex-wrap items-center gap-x-5 gap-y-3'>
+                <a
+                  href='https://nezexone.com/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-2.5 rounded-lg px-3.5 h-10 text-sm text-zinc-200 bg-zinc-50/5 ring-1 ring-inset ring-zinc-50/10 transition-colors hover:bg-zinc-50/10'
                 >
-                  arrow_outward
-                </span>
-              </a>
+                  <span className='relative w-2 h-2 rounded-full bg-emerald-400'>
+                    <span className='absolute inset-0 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none'></span>
+                  </span>
+                  See NezeX One live
+                  <ArrowUpRight
+                    size={18}
+                    className='text-zinc-400'
+                    aria-hidden='true'
+                  />
+                </a>
+
+                <Link
+                  href='/projects/nezex-one'
+                  className='text-sm text-sky-400 transition-colors hover:text-sky-300'
+                >
+                  How I built it
+                </Link>
+              </div>
             </div>
 
-            <dl className='self-start lg:border-l lg:border-zinc-700/60 lg:pl-14'>
-              {ledger.map(({ label, value }) => (
-                <div
-                  key={label}
-                  className='flex items-baseline gap-3 py-2.5 first:pt-0 last:pb-0'
-                >
-                  <dt className="flex flex-1 items-baseline gap-3 text-sm md:text-base text-zinc-400 after:content-[''] after:flex-1 after:min-w-6 after:border-b after:border-dotted after:border-zinc-500 after:translate-y-[-0.3em]">
-                    {label}
-                  </dt>
-                  <dd className='text-lg md:text-xl font-semibold text-zinc-50 tabular-nums whitespace-nowrap'>
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <Ledger
+              rows={trackRecord}
+              classes='self-start lg:border-l lg:border-zinc-700/60 lg:pl-14'
+            />
           </div>
 
           <p className='sr-only'>

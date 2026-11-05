@@ -2,39 +2,38 @@
  * @copyright 2024 RASHID_C
  * @license Apache-2.0
  */
-import { useState } from 'react'
-import { contact } from '../data/contact'
-
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
+import { Mail, MapPin, MessageSquare, Phone, Smartphone } from 'lucide-react'
+import ContactForm from './ContactForm'
+import { contact } from '@/data/contact'
 
 const contactRows = [
   {
-    icon: 'call',
+    icon: Phone,
     label: 'Phone (UAE) · primary',
     value: contact.phoneUae.display,
     href: contact.phoneUae.href,
   },
   {
-    icon: 'chat',
+    icon: MessageSquare,
     label: 'WhatsApp (UAE)',
     value: contact.phoneUae.display,
     href: contact.whatsappHref,
     external: true,
   },
   {
-    icon: 'mail',
+    icon: Mail,
     label: 'Email',
     value: contact.email,
     href: `mailto:${contact.email}`,
   },
   {
-    icon: 'phone_iphone',
+    icon: Smartphone,
     label: 'Phone (India)',
     value: contact.phoneIndia.display,
     href: contact.phoneIndia.href,
   },
   {
-    icon: 'location_on',
+    icon: MapPin,
     label: 'Location',
     value: contact.location,
   },
@@ -140,63 +139,6 @@ const socialLinks = [
 ]
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    if (!WEB3FORMS_ACCESS_KEY) {
-      alert('Missing VITE_WEB3FORMS_ACCESS_KEY in frontend .env file')
-      return
-    }
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          from_name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      })
-
-      const result = await response.json()
-
-      if (response.ok && result.success) {
-        alert('Message sent successfully!')
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-        })
-      } else {
-        throw new Error(result.message || 'Submission failed')
-      }
-    } catch (error) {
-      console.error('Error sending message:', error)
-      alert('Failed to send message. Please try again later.')
-    }
-  }
-
   return (
     <section id='contact' className='section'>
       <div className='container lg:grid lg:grid-cols-2 lg:items-stretch'>
@@ -212,16 +154,14 @@ const Contact = () => {
           </p>
 
           <ul className='space-y-3 mb-8'>
-            {contactRows.map(({ icon, label, value, href, external }) => {
+            {contactRows.map(({ icon: Icon, label, value, href, external }) => {
               const body = (
                 <>
                   <span
                     className='w-10 h-10 shrink-0 rounded-lg grid place-items-center bg-zinc-800 text-sky-400 ring-1 ring-inset ring-zinc-50/5'
                     aria-hidden='true'
                   >
-                    <span className='material-symbols-rounded text-[20px]'>
-                      {icon}
-                    </span>
+                    <Icon size={20} />
                   </span>
                   <span className='min-w-0'>
                     <span className='block text-xs text-zinc-500'>{label}</span>
@@ -252,20 +192,18 @@ const Contact = () => {
           </ul>
 
           <div className='flex items-center gap-2 mt-auto'>
-            {socialLinks.map(({ href, icon, alt }, key) => (
+            {socialLinks.map(({ href, icon, alt }) => (
               <a
-                key={key}
+                key={alt}
                 href={href}
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={alt}
-                className={`w-12 h-12 grid place-items-center ring-inset ring-2 ring-zinc-50/5 rounded-lg transition-transform duration-300 ease-in-out 
-             hover:scale-125 hover:shadow-2xl active:bg-zinc-50/80 reveal-up
-             ${
-               alt === 'WhatsApp'
-                 ? 'text-green-800 bg-green-500 animate-pulse shadow-lg animate-zoom'
-                 : ''
-             }`}
+                className={`w-12 h-12 grid place-items-center ring-inset ring-2 ring-zinc-50/5 rounded-lg transition-transform duration-300 ease-in-out hover:scale-125 hover:shadow-2xl active:bg-zinc-50/80 reveal-up ${
+                  alt === 'WhatsApp'
+                    ? 'text-green-800 bg-green-500 animate-pulse motion-reduce:animate-none shadow-lg'
+                    : ''
+                }`}
               >
                 {icon}
               </a>
@@ -273,90 +211,10 @@ const Contact = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className='xl:pl-10 2xl:pl-20'>
-          <div className='md:grid md:items-center md:grid-cols-2 md:gap-2'>
-            <div className='mb-4'>
-              <label htmlFor='name' className='label reveal-up'>
-                Name
-              </label>
-
-              <input
-                type='text'
-                name='name'
-                id='name'
-                autoComplete='name'
-                required
-                placeholder='Your name plz...'
-                className='text-field reveal-up'
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='mb-4'>
-              <label htmlFor='email' className='label reveal-up'>
-                Email
-              </label>
-
-              <input
-                type='email'
-                name='email'
-                id='email'
-                autoComplete='email'
-                required
-                placeholder='your.email@example.com'
-                className='text-field reveal-up'
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='mb-4 md:col-span-2'>
-              <label htmlFor='subject' className='label reveal-up'>
-                Subject
-              </label>
-
-              <input
-                type='text'
-                name='subject'
-                id='subject'
-                required
-                placeholder="What's this about?"
-                className='text-field reveal-up'
-                value={formData.subject}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='mb-4 md:col-span-2'>
-              <label htmlFor='message' className='label reveal-up'>
-                Message
-              </label>
-
-              <textarea
-                name='message'
-                id='message'
-                placeholder='Hi! type here...'
-                required
-                className='text-field resize-y min-h-32 max-h-80 reveal-up'
-                value={formData.message}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-          </div>
-
-          <button
-            type='submit'
-            className='btn btn-primary [&]:max-w-full w-full justify-center reveal-up'
-          >
-            Submit
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </section>
   )
 }
 
 export default Contact
-
-

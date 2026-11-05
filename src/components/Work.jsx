@@ -3,199 +3,30 @@
  * @license Apache-2.0
  */
 
-/**
- * Node modules
- */
-import { useRef, useState } from "react";
-import { useLenis } from "lenis/react";
-
-/**
- * Components
- */
-import ProjectCard from "./ProjectCard";
-import ecommerce from "../images/ecommerce.png";
-import project1 from "../images/project-1.png";
-import gocart from "../images/gocart.png";
-import project3 from "../images/project-3.png";
-import english from "../images/english.png";
-import kerala from "../images/kerala.png";
-import mehara from "../images/mehara.png";
-import NIBX from "../images/nibx.png";
-import mptms from "../images/mptms.png";
-import polosysbooks from "../images/polosysbooks.png";
-import nezex from "../images/nezex.png";
-import alfath from "../images/alfath.png";
-
-const works = [
-  {
-    imgSrc: nezex,
-    title: "NezeX One - Cloud ERP (UAE)",
-    tags: ["Django REST Framework", "Next.js", "PostgreSQL", "UAE VAT", "AWS", "Docker"],
-    projectLink: "https://nezexone.com/",
-  },
-  {
-    imgSrc: alfath,
-    title: "Al Fath - Accounting (UAE)",
-    tags: ["NestJS", "PostgreSQL", "Prisma", "Next.js", "Vitest"],
-    projectLink: "https://client-workflow-management-system.vercel.app/",
-  },
-  {
-    imgSrc: ecommerce,
-    title: "AZC E-commerce (UAE)",
-    tags: ["Next.js", "Stripe & PayPal", "OpenAI", "Admin Dashboard", "shadcn/ui"],
-    projectLink: "https://www.azcstore.info/",
-  },
-  {
-    imgSrc: polosysbooks,
-    title: "Polosys Books - SaaS ERP (GCC)",
-    tags: ["Django REST Framework", "Multi-Tenant", "PostgreSQL", "AWS Lambda"],
-    projectLink: "https://web.polosysbooks.com/login/",
-  },
-  {
-    imgSrc: mptms,
-    title: "Mehar Pardha - Tailor Management (UAE)",
-    tags: ["Next.js", "Django REST Framework", "PostgreSQL", "JWT Auth"],
-    projectLink: "https://tmsmp.vercel.app/",
-  },
-  {
-    imgSrc: mehara,
-    title: "Mehara Pardha E-commerce (UAE)",
-    tags: ["Next.js", "Google OAuth", "E-commerce", "JWT Auth", "Admin Dashboard"],
-    projectLink: "https://meharcollective.vercel.app/",
-  },
-  {
-    imgSrc: NIBX,
-    title: "NIBX (USA)",
-    tags: ["React.js", "Vite", "Tailwind CSS", "Responsive UI", "Motion"],
-    projectLink: "https://www.thenibx.com/",
-  },
-  {
-    imgSrc: project1,
-    title: "MERN Blog - Blog Platform",
-    tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
-    projectLink: "https://bloganu.vercel.app/",
-  },
-
-  {
-    imgSrc: english,
-    title: "English Expert Coaching Platform",
-    tags: ["React.js", "Tailwind CSS", "Responsive UI"],
-    projectLink: "https://kerala-english-coach.vercel.app",
-  },
-  {
-    imgSrc: gocart,
-    title: "Multi-Vendor E-commerce",
-    tags: ["Next.js", "Tailwind CSS", "Responsive UI"],
-    projectLink: "https://nexuscart-alpha.vercel.app",
-  },
-  {
-    imgSrc: kerala,
-    title: "Bakery Store",
-    tags: ["React.js", "Tailwind CSS", "Responsive UI"],
-    projectLink: "https://keralabakery.netlify.app",
-  },
-
-  {
-    imgSrc: project3,
-    title: "Rashid's Blog - CMS",
-    tags: ["MERN", "Google OAuth", "Admin Dashboard"],
-    projectLink: "https://github.com/Rashid-C/mern-blog",
-  },
-];
-
-const ITEMS_PER_PAGE = 4;
+import Paginated from './Paginated'
+import ProjectCard from './ProjectCard'
+import { projects } from '@/data/projects'
 
 const Work = () => {
-  const lenis = useLenis();
-  const [currentPage, setCurrentPage] = useState(1);
-  const sectionRef = useRef(null);
-  const totalPages = Math.ceil(works.length / ITEMS_PER_PAGE);
-
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentWorks = works.slice(start, start + ITEMS_PER_PAGE);
-  const emptySlots = ITEMS_PER_PAGE - currentWorks.length;
-
-  const handlePageChange = (nextPage) => {
-    setCurrentPage(nextPage);
-
-    requestAnimationFrame(() => {
-      if (!sectionRef.current) return;
-      lenis?.scrollTo(sectionRef.current, { offset: -88 });
-    });
-  };
-
   return (
-    <section id="work" className="section" ref={sectionRef}>
-      <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">Major projects</h2>
+    <section id='work' className='section'>
+      <div className='container'>
+        <h2 className='headline-2 mb-8 reveal-up'>Major projects</h2>
 
-        <div className="reveal-up">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-            {currentWorks.map(({ imgSrc, title, tags, projectLink }, key) => (
-              <ProjectCard
-                key={`${title}-${key}`}
-                imgSrc={imgSrc}
-                title={title}
-                tags={tags}
-                projectLink={projectLink}
-                index={key}
-              />
+        <div className='reveal-up'>
+          <Paginated
+            perPage={4}
+            label='Projects'
+            gridClassName='grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4'
+          >
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
             ))}
-
-            {emptySlots > 0 &&
-              Array.from({ length: emptySlots }, (_, index) => (
-                <div
-                  key={`empty-slot-${index}`}
-                  className="invisible rounded-xl border border-zinc-700/40"
-                  aria-hidden="true"
-                />
-              ))}
-          </div>
-
-          <div className="flex items-center justify-center gap-2 mt-6">
-            <button
-              type="button"
-              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Prev
-            </button>
-
-            {Array.from({ length: totalPages }, (_, index) => {
-              const page = index + 1;
-              const isActive = page === currentPage;
-
-              return (
-                <button
-                  key={page}
-                  type="button"
-                  onClick={() => handlePageChange(page)}
-                  className={`h-9 min-w-9 px-3 rounded-lg text-sm transition-colors ${isActive
-                      ? "bg-sky-400 text-zinc-950"
-                      : "bg-zinc-800 hover:bg-zinc-700 text-zinc-100"
-                    }`}
-                >
-                  {page}
-                </button>
-              );
-            })}
-
-            <button
-              type="button"
-              onClick={() =>
-                handlePageChange(Math.min(totalPages, currentPage + 1))
-              }
-              disabled={currentPage === totalPages}
-              className="h-9 px-3 rounded-lg text-sm bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Next
-            </button>
-          </div>
+          </Paginated>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Work;
+export default Work

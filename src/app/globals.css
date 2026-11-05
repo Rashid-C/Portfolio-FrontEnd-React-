@@ -7,12 +7,32 @@
 body {
   @apply bg-zinc-900 text-zinc-50;
 }
+
+/* Section links land below the fixed header */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* TYPOGRAPHY */
 .headeline-1,
 .headline-2 {
   @apply max-w-max;
-  background: -webkit-linear-gradient(0deg, #fafafa, #a1a1aa);
+  background: linear-gradient(90deg, #fafafa, #a1a1aa);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -28,11 +48,6 @@ body {
   @apply text-[22px] font-normal;
 }
 /* UTILITIES */
-
-.material-symbols-rounded {
-  @apply w-[1em] h-[1em] overflow-hidden;
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-}
 
 .container {
   @apply px-4 mx-auto lg:px-8 xl:max-w-6xl;
@@ -134,8 +149,13 @@ body {
 } */
 
 .navbar .active-box {
-  @apply absolute top-2 left-2 right-2 h-9 bg-zinc-50 rounded-lg -z-10 
+  @apply absolute top-2 left-2 right-2 h-9 bg-zinc-50 rounded-lg -z-10 opacity-0
   transition-[top,left] duration-500;
+}
+
+/* Before JavaScript has placed the sliding box, the active link draws its own highlight */
+.navbar:not([data-ready]) .nav-link.active {
+  @apply bg-zinc-50 rounded-lg;
 }
 
 /* 3 Button */
@@ -150,11 +170,11 @@ body {
   @apply bg-zinc-50 text-zinc-900 active:bg-zinc-50/80;
 }
 
-.btn .material-symbols-rounded {
-  @apply text-[18px];
+.btn svg {
+  @apply w-[18px] h-[18px];
 }
 
-.btn:has(.material-symbols-rounded) {
+.btn:has(svg) {
   @apply pr-3;
 }
 
