@@ -7,13 +7,27 @@ import { useState } from 'react'
 
 const experiences = [
   {
-    role: 'Back End Developer',
-    company: 'Polosys Technologies LLP',
-    duration: 'Jun 2026 - Present',
-    location: 'Kozhikode, India',
+    role: 'Full Stack Engineer',
+    company: 'AZC Electronics Trading LLC',
+    duration: 'Jan 2026 - Present',
+    location: 'Dubai, UAE · On-site',
     highlights: [
-      'Built and maintained REST APIs across Sales Invoice, Sales Order, Delivery Challan, Estimates, Purchase, Inventory, and Customer modules in an organisation-scoped multi-tenant architecture serving the GCC and Saudi Arabia market.',
-      'Cut VendorCredit transaction processing ~99% (110s → 800ms) by rebuilding the service layer with bulk database operations and a custom incremental FIFO engine (FIFOEngineV2), unblocking real-time invoice workflows.',
+      'Sole engineer of NezeX One (nezexone.com), a multi-tenant cloud ERP live in production in the UAE and used daily by its client - 11 Django apps with per-tenant data isolation and multiple branches per business, on Django REST Framework, PostgreSQL and Next.js/TypeScript.',
+      'Implemented UAE VAT tax invoices with TRN, locked issued invoices corrected through credit notes, and custom payment terms with due-date calculation.',
+      'Designed role-based access control with 29 granular permissions and 8 customisable default roles, enforced centrally on every API request.',
+      'Wrote 527 automated backend tests in a GitHub Actions CI pipeline, ran 127 schema and data migrations on the live PostgreSQL database, and built a deployment script that backs up the database, uploads Docker images and restarts services on AWS EC2 and S3.',
+      'Built Al Fath for an Abu Dhabi accounting and tax firm - a bilingual (English/Arabic) public website plus a staff practice-management system: NestJS REST API on PostgreSQL/Prisma with per-module permissions, optimistic locking, a transactional field-level audit log, login rate limiting, least-privilege database roles and 250+ Vitest tests.',
+      'Own the company\'s production e-commerce website (azcstore.info) - Next.js, Node.js and MongoDB with Stripe and PayPal payments, Next.js SEO, Google Analytics and an OpenAI-powered customer engagement feature.',
+    ],
+  },
+  {
+    role: 'Back End Developer (Contract)',
+    company: 'Polosys Technologies LLP',
+    duration: 'Jun 2026 - Aug 2026',
+    location: 'Malappuram, India · Remote',
+    highlights: [
+      'Built and maintained REST APIs across Sales Invoice, Sales Order, Delivery Challan, Estimates, Purchase, Inventory, and Customer modules in an organisation-scoped multi-tenant SaaS ERP serving the GCC and Saudi Arabia market.',
+      'Cut VendorCredit transaction processing ~99% (110s → 800ms) on AWS Lambda and RDS by rebuilding the service layer with bulk database operations and a custom incremental FIFO engine (FIFOEngineV2), unblocking real-time invoice workflows.',
       'Reduced PurchaseInvoice processing from up to 60 seconds to 1-2 seconds using the same V2 architecture, removing a daily bottleneck in accounting operations.',
       'Fixed 14 interconnected bugs across 5 files in the Delivery Challan module - inventory reversal, status-machine handling, and DC-to-invoice conversion edge cases including voided and bulk-deleted invoices.',
       'Added multi-unit quantity conversion (carton to piece) across Delivery Challan, Sales Order, and Sales Invoice, letting items be sold in one unit while inventory tracks in another without breaking downstream documents.',
@@ -24,66 +38,52 @@ const experiences = [
     ],
   },
   {
-    role: 'Full Stack Engineer',
-    company: 'AZC Electronics Trading LLC',
-    duration: 'Jan 2026 - Present',
-    location: 'Dubai, UAE',
-    highlights: [
-      'Built and maintain a production e-commerce platform by owning the full stack in Next.js, TypeScript, and MongoDB, keeping it live for GCC customers.',
-      'Enabled multiple payment options and cleaner order handling by integrating two payment gateways and building end-to-end order/admin workflows.',
-      'Improved reach and usability across Gulf markets by implementing SEO architecture and multilingual support, and added AI-powered customer engagement tooling.',
-    ],
-  },
-  {
-    role: 'Freelance Developer',
-    company: 'Self-Employed',
-    duration: 'Sep 2025 - Dec 2025',
-    location: 'Remote',
-    highlights: [
-      'Lifted user engagement 15% on an LMS and e-commerce platform by shipping new MERN-stack features as part of a 4-person team, designing and integrating the RESTful APIs end to end.',
-      'Cut component load time 10% by refactoring legacy React components, improving readability for the rest of the team.',
-    ],
-  },
-  {
     role: 'Software Developer',
-    company: 'Doctosmart, Govt. CyberPark',
-    duration: 'Jul 2024 - Sep 2025',
-    location: 'Calicut, India',
+    company: 'Doctosmart Enterprises, Govt. Cyber Park',
+    duration: 'Jul 2024 - Dec 2025',
+    location: 'Calicut, India · On-site',
     highlights: [
-      'Delivered a full IVF clinic management system by designing the relational database schema and REST APIs in Django/DRF and PostgreSQL, covering patient records, appointments, and medical history.',
-      'Built a MERN-stack blog platform end to end - authentication, CRUD for posts and comments, image uploads, and a responsive React front end - as a solo ownership project.',
+      'Delivered a clinical (IVF) management system by designing the relational database schema and REST APIs in Django/DRF and PostgreSQL, covering patient records, appointments, and medical history.',
+      'Built a MERN-stack e-commerce platform end to end - authentication, product and order flows, admin tooling, and a responsive React front end.',
+      'Mentored 2 junior developers through code reviews.',
     ],
   },
   {
     role: 'MERN Stack Developer',
     company: 'Learnbuds',
     duration: 'Jan 2024 - Jul 2024',
-    location: 'Ernakulam, India',
+    location: 'Ernakulam, India · Hybrid',
     highlights: [
       'Built the authentication module for a matrimony platform (MERN stack) - sign-up, login, and JWT/session-based token generation - by designing the token and session-handling layer.',
       'Added self-service password-reset flows so users could recover account access without manual intervention.',
     ],
   },
   {
-    role: 'MERN Stack Developer',
+    role: 'MERN Stack Developer (Internship)',
     company: 'Brototype',
     duration: 'Oct 2022 - Dec 2023',
-    location: 'Malappuram, India',
+    location: 'Malappuram, India · On-site',
     highlights: [
       'Completed an intensive MERN program focused on production-ready full-stack development.',
       'Built multiple projects including e-commerce, social, and booking systems using React, Node.js, and MongoDB.',
     ],
   },
-  {
-    role: 'AI-Data Scientist',
-    company: 'DDU-GKY',
-    duration: 'Mar 2022 - Aug 2022',
-    location: 'Hyderabad, India',
-    highlights: [
-      'Completed an AI & Data Science certification covering Python, HTML, CSS, and data structures.',
-    ],
-  },
 ]
+
+const education = {
+  degree: 'BSc Computer Science',
+  school: 'University of Calicut, Kerala',
+  duration: '2018 - 2022',
+}
+
+const certifications = [
+  'One Million Prompters - AI Prompt Engineering (Dubai Future Foundation)',
+  'AI & Data Science (DDU-GKY)',
+  'MongoDB Basics (MongoDB University)',
+  'EF SET English - B2',
+]
+
+const languages = 'English, Malayalam, Hindi (basic)'
 
 const DEFAULT_VISIBLE = 3
 
@@ -108,8 +108,8 @@ const Experience = () => {
         <h2 className='headline-2 mb-3 reveal-up'>Work experience</h2>
 
         <p className='text-zinc-400 mb-8 max-w-[60ch] reveal-up'>
-          Roles and projects where I contributed to shipping reliable,
-          user-focused web applications.
+          Four years of shipping production software &mdash; most recently
+          ERP and e-commerce systems running live in the UAE.
         </p>
 
         <div className='relative'>
@@ -181,6 +181,38 @@ const Experience = () => {
                 )
               }
             )}
+          </div>
+        </div>
+
+        <div className='mt-12 bg-zinc-800/50 p-7 rounded-2xl md:p-10 reveal-up'>
+          <h3 className='title-1 mb-5'>Education &amp; certifications</h3>
+
+          <div className='grid gap-6 md:grid-cols-2'>
+            <div>
+              <p className='text-zinc-200'>{education.degree}</p>
+              <p className='text-sm text-zinc-400 mt-1'>
+                {education.school} &middot; {education.duration}
+              </p>
+
+              <p className='text-sm text-zinc-400 mt-4'>
+                <span className='text-zinc-300'>Languages:</span> {languages}
+              </p>
+            </div>
+
+            <ul className='space-y-2'>
+              {certifications.map((item) => (
+                <li
+                  key={item}
+                  className='text-sm md:text-base text-zinc-300 flex gap-2'
+                >
+                  <span
+                    className='mt-2 h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0'
+                    aria-hidden='true'
+                  ></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

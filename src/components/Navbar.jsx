@@ -71,13 +71,14 @@ const Navbar = ({ navOpen, onNavigate }) => {
           scrollPosition >= sectionTop &&
           scrollPosition < sectionTop + sectionHeight
         ) {
-          navLinks.current.forEach((link) => link.classList.remove('active'))
-
           const activeLink = navLinks.current.find(
             (link) => link.getAttribute('href') === `#${sectionId}`
           )
 
+          // Sections without a nav link (e.g. #skills) keep the previous
+          // highlight instead of leaving an empty white pill behind.
           if (activeLink && activeBox.current) {
+            navLinks.current.forEach((link) => link.classList.remove('active'))
             activeLink.classList.add('active')
             lastActiveLink.current = activeLink
 

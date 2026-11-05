@@ -35,13 +35,19 @@ const ProjectCard = ({ imgSrc, title, tags, projectLink, classes, index = 0 }) =
 
       <div className='flex items-start justify-between gap-3'>
         <div className='min-w-0 flex-1'>
-          <h3 className='title-1 mb-3 truncate'>{title}</h3>
+          <h3
+            className='text-base md:text-lg leading-snug font-normal mb-3 line-clamp-2'
+            title={title}
+          >
+            {title}
+          </h3>
 
           <div className='flex flex-wrap items-center gap-1.5'>
             {visibleTags.map((label, key) => (
               <span
                 key={key}
-                className='h-6 text-xs text-zinc-400 bg-zinc-50/5 grid items-center px-2.5 rounded-md whitespace-nowrap'
+                title={label}
+                className='h-6 leading-6 text-xs text-zinc-400 bg-zinc-50/5 block max-w-full truncate px-2.5 rounded-md'
               >
                 {label}
               </span>
@@ -55,7 +61,7 @@ const ProjectCard = ({ imgSrc, title, tags, projectLink, classes, index = 0 }) =
           </div>
         </div>
 
-        <div className='w-11 h-11 rounded-lg grid place-items-center bg-sky-400 text-zinc-950 shrink-0 self-start'>
+        <div className='hidden sm:grid w-11 h-11 rounded-lg place-items-center bg-sky-400 text-zinc-950 shrink-0 self-start'>
           <span className='material-symbols-rounded' aria-hidden='true'>
             arrow_outward
           </span>

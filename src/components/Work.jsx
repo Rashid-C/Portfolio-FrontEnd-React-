@@ -23,8 +23,34 @@ import mehara from "../images/mehara.png";
 import NIBX from "../images/nibx.png";
 import mptms from "../images/mptms.png";
 import polosysbooks from "../images/polosysbooks.png";
+import nezex from "../images/nezex.png";
+import alfath from "../images/alfath.png";
 
 const works = [
+  {
+    imgSrc: nezex,
+    title: "NezeX One - Cloud ERP (UAE)",
+    tags: ["Django REST Framework", "Next.js", "PostgreSQL", "UAE VAT", "AWS", "Docker"],
+    projectLink: "https://nezexone.com/",
+  },
+  {
+    imgSrc: alfath,
+    title: "Al Fath - Accounting (UAE)",
+    tags: ["NestJS", "PostgreSQL", "Prisma", "Next.js", "Vitest"],
+    projectLink: "https://client-workflow-management-system.vercel.app/",
+  },
+  {
+    imgSrc: ecommerce,
+    title: "AZC E-commerce (UAE)",
+    tags: ["Next.js", "Stripe & PayPal", "OpenAI", "Admin Dashboard", "shadcn/ui"],
+    projectLink: "https://www.azcstore.info/",
+  },
+  {
+    imgSrc: polosysbooks,
+    title: "Polosys Books - SaaS ERP (GCC)",
+    tags: ["Django REST Framework", "Multi-Tenant", "PostgreSQL", "AWS Lambda"],
+    projectLink: "https://web.polosysbooks.com/login/",
+  },
   {
     imgSrc: mptms,
     title: "Mehar Pardha - Tailor Management (UAE)",
@@ -32,46 +58,20 @@ const works = [
     projectLink: "https://tmsmp.vercel.app/",
   },
   {
-    imgSrc: polosysbooks,
-    title: "Polosys Books - Multi-Tenant ERP (GCC)",
-    tags: ["Django REST Framework", "Multi-Tenant", "PostgreSQL", "SaaS"],
-    projectLink: "https://web.polosysbooks.com/login/",
+    imgSrc: mehara,
+    title: "Mehara Pardha E-commerce (UAE)",
+    tags: ["Next.js", "Google OAuth", "E-commerce", "JWT Auth", "Admin Dashboard"],
+    projectLink: "https://meharcollective.vercel.app/",
   },
   {
     imgSrc: NIBX,
-    title: "NIBX-(USA)",
+    title: "NIBX (USA)",
     tags: ["React.js", "Vite", "Tailwind CSS", "Responsive UI", "Motion"],
     projectLink: "https://www.thenibx.com/",
   },
   {
-    imgSrc: mehara,
-    title: "Mehara Pardha Ecommerce -(UAE)",
-    tags: [
-      "Nextjs",
-      "Google OAuth",
-      "ecommerse",
-      "JWT Auth",
-      "Admin Dashboard",
-    ],
-    projectLink: "https://meharcollective.vercel.app/",
-  },
-  {
-    imgSrc: ecommerce,
-    title: "AZC Ecommerce  (UAE)",
-    tags: [
-      "Nextjs",
-      "Stripe&PayPal",
-      "Admin Dashboard",
-      "shadcn UI",
-      "fullstack",
-    ],
-    projectLink: "https://www.azcstore.info/",
-
-    // projectLink: "https://azc-ecom.vercel.app",
-  },
-  {
     imgSrc: project1,
-    title: "MERN Blog - Blog Plateform",
+    title: "MERN Blog - Blog Platform",
     tags: ["MERN", "Google OAuth", "JWT Auth", "Admin Dashboard"],
     projectLink: "https://bloganu.vercel.app/",
   },
@@ -84,7 +84,7 @@ const works = [
   },
   {
     imgSrc: gocart,
-    title: "Multi Venter e-commerce",
+    title: "Multi-Vendor E-commerce",
     tags: ["Next.js", "Tailwind CSS", "Responsive UI"],
     projectLink: "https://nexuscart-alpha.vercel.app",
   },

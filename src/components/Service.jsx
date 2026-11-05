@@ -9,49 +9,54 @@ import { gsap } from 'gsap'
 
 const services = [
   {
+    icon: 'apartment',
+    title: 'ERP & SaaS Development',
+    desc: 'Multi-tenant business systems: sales, purchase, inventory, reporting, and UAE VAT tax invoices with credit notes.',
+  },
+  {
     icon: 'language',
     title: 'Web Development',
-    desc: 'Scalable web applications with clean architecture, SEO foundations, and production-ready delivery.',
+    desc: 'Responsive Next.js and React applications for every screen size, with clean architecture and SEO foundations.',
   },
   {
     icon: 'smartphone',
     title: 'Mobile App Development',
-    desc: 'Cross-platform mobile experiences focused on performance, usability, and maintainable codebases.',
+    desc: 'Cross-platform iOS and Android apps with React Native, sharing APIs and business logic with your web platform.',
   },
   {
     icon: 'dns',
-    title: 'Backend Development',
-    desc: 'Secure REST APIs, authentication systems, role-based access, and reliable server-side logic.',
+    title: 'Backend & API Development',
+    desc: 'REST APIs in Django REST Framework, NestJS and Express, with role-based access and reliable business logic.',
   },
   {
     icon: 'database',
-    title: 'Database Management',
-    desc: 'Schema design, query optimization, indexing, migrations, and high-performance data operations.',
+    title: 'Database Design',
+    desc: 'PostgreSQL and MySQL schema design, indexing, query tuning, and safe migrations on live data.',
   },
   {
     icon: 'cloud',
-    title: 'Cloud Integration',
-    desc: 'Cloud deployments, storage integrations, environment setup, and scalable infrastructure workflows.',
+    title: 'Cloud & DevOps',
+    desc: 'Docker deployments on AWS (EC2, S3, RDS, Lambda), GitHub Actions CI/CD, backups, and automated releases.',
   },
   {
     icon: 'payments',
-    title: 'Payment Gateway Integration',
-    desc: 'Stripe/PayPal integrations with secure checkout, subscriptions, and transaction reliability.',
+    title: 'Payments & Integrations',
+    desc: 'Stripe, PayPal, WhatsApp API and Zoho CRM integrations with secure checkout and reliable transactions.',
   },
   {
     icon: 'security',
     title: 'Security and Authentication',
-    desc: 'JWT/OAuth flows, API hardening, validation layers, and secure access management.',
+    desc: 'JWT auth, granular permissions, audit logs, rate limiting, and least-privilege database access.',
+  },
+  {
+    icon: 'smart_toy',
+    title: 'AI Integration',
+    desc: 'OpenAI-powered product features and AI-assisted engineering, with careful review for correctness and security.',
   },
   {
     icon: 'trending_up',
     title: 'SEO Optimization',
     desc: 'On-page SEO, technical SEO setup, metadata strategy, and search visibility improvements.',
-  },
-  {
-    icon: 'devices',
-    title: 'Responsive Design',
-    desc: 'Consistent user experience across mobile, tablet, and desktop with modern UI implementation.',
   },
   {
     icon: 'rocket_launch',

@@ -6,8 +6,6 @@
 import { useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import SkillCard from './SkillCard'
-import figma from '../images/figma.svg'
-import css from '../images/css3.svg'
 import js from '../images/javascript.svg'
 import node from '../images/nodejs.svg'
 import express from '../images/expressjs.svg'
@@ -21,51 +19,48 @@ import redis from '../images/redis.svg'
 import prisma from '../images/prisma.svg'
 import docker from '../images/docker.svg'
 import aws from '../images/aws.svg'
-import vercel from '../images/vercel.svg'
-import git from '../images/git.svg'
 import stripe from '../images/stripe.svg'
 import Aouth from '../images/oauth.svg'
 import GitHub from '../images/github.svg'
 import redux from '../images/redux.svg'
 import python from '../images/python.svg'
 import django from '../images/django.svg'
+import nestjs from '../images/nestjs.svg'
+import mysql from '../images/mysql.svg'
+import githubActions from '../images/githubactions.svg'
+import openai from '../images/openai.svg'
+import vitest from '../images/vitest.svg'
 
 const skillItems = [
-  // Core stack, in the order it's presented on my LinkedIn headline
-  { imgSrc: django, label: 'Django REST Framework', desc: 'Backend Framework' },
-  { imgSrc: next, label: 'Next.js 15', desc: 'SSR and SSG Apps' },
-  { imgSrc: react, label: 'React.js', desc: 'Frontend Framework' },
-  { imgSrc: node, label: 'Node.js', desc: 'Backend Runtime' },
-  { imgSrc: postgresql, label: 'PostgreSQL', desc: 'Relational Database' },
-
-  // Supporting languages and backend
-  { imgSrc: python, label: 'Python', desc: 'Programming Language' },
+  // Core stack, in the order it appears on my resume headline
+  { imgSrc: next, label: 'Next.js', desc: 'SSR, SSG and SEO' },
+  { imgSrc: react, label: 'React.js', desc: 'Frontend Library' },
   { imgSrc: typescript, label: 'TypeScript', desc: 'Typed JavaScript' },
-  { imgSrc: js, label: 'JavaScript ES6+', desc: 'Core Language' },
+  { imgSrc: python, label: 'Python', desc: 'Programming Language' },
+  { imgSrc: node, label: 'Node.js', desc: 'Backend Runtime' },
+  { imgSrc: nestjs, label: 'NestJS', desc: 'Structured Node APIs' },
+  { imgSrc: django, label: 'Django REST Framework', desc: 'Python APIs' },
+  { imgSrc: postgresql, label: 'PostgreSQL', desc: 'Schema Design & Tuning' },
+
+  // Infra, data layer and cloud
+  { imgSrc: docker, label: 'Docker', desc: 'Containerised Deploys' },
   { imgSrc: express, label: 'Express.js', desc: 'REST API Framework' },
+  { imgSrc: mysql, label: 'MySQL', desc: 'Relational Database' },
+  { imgSrc: mongodb, label: 'MongoDB', desc: 'NoSQL Database' },
+  { imgSrc: prisma, label: 'Prisma ORM', desc: 'Migrations & Queries' },
+  { imgSrc: redis, label: 'Redis', desc: 'Caching Layer' },
+  { imgSrc: aws, label: 'AWS', desc: 'EC2, S3, RDS, Lambda' },
+  { imgSrc: githubActions, label: 'GitHub Actions', desc: 'CI/CD Pipelines' },
 
-  // Data layer
-  { imgSrc: mongodb, label: 'MongoDB Atlas', desc: 'NoSQL Database' },
-  { imgSrc: prisma, label: 'Prisma ORM', desc: 'Database ORM' },
-  { imgSrc: redis, label: 'Redis Caching', desc: 'Performance Layer' },
-
-  // Frontend styling and state
-  { imgSrc: react, label: 'React Native', desc: 'Cross-Platform Mobile Apps' },
-  { imgSrc: tailwind, label: 'Tailwind CSS', desc: 'Modern UI Styling' },
-  { imgSrc: css, label: 'CSS3', desc: 'Responsive UI' },
-  { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
-
-  // Security and payments
-  { imgSrc: Aouth, label: 'OAuth and JWT', desc: 'Secure Authentication' },
+  // Integrations, quality and tooling
   { imgSrc: stripe, label: 'Stripe and PayPal', desc: 'Payments Integration' },
-
-  // Infra and tooling
-  { imgSrc: docker, label: 'Docker', desc: 'Containerization' },
-  { imgSrc: aws, label: 'AWS S3 and EC2', desc: 'Cloud Services' },
-  { imgSrc: vercel, label: 'Vercel', desc: 'Deployment Platform' },
-  { imgSrc: git, label: 'Git', desc: 'Version Control' },
-  { imgSrc: GitHub, label: 'GitHub', desc: 'Secure version control' },
-  { imgSrc: figma, label: 'Figma UI', desc: 'Design System' },
+  { imgSrc: Aouth, label: 'JWT and RBAC', desc: 'Auth & Permissions' },
+  { imgSrc: openai, label: 'OpenAI API', desc: 'AI Product Features' },
+  { imgSrc: vitest, label: 'Vitest', desc: 'Automated Testing' },
+  { imgSrc: tailwind, label: 'Tailwind CSS', desc: 'With shadcn/ui' },
+  { imgSrc: redux, label: 'Redux Toolkit', desc: 'State Management' },
+  { imgSrc: js, label: 'JavaScript ES6+', desc: 'Core Language' },
+  { imgSrc: GitHub, label: 'Git and GitHub', desc: 'Version Control' },
 ]
 
 const ITEMS_PER_PAGE = 8

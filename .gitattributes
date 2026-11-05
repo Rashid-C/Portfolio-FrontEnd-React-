@@ -1,0 +1,9 @@
+# Never apply line-ending conversion to binary assets
+# (small PDFs can look like text to git, and CRLF conversion corrupts them).
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary

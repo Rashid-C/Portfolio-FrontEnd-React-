@@ -30,12 +30,17 @@ const Hero = () => {
               <span className='relative w-2 h-2 rounded-full bg-emerald-400'>
                 <span className='absolute inset-0 rounded-full bg-emerald-400 animate-ping'></span>
               </span>
-              Available for work
+              Available immediately &middot; Dubai,&nbsp;UAE
             </div>
           </div>
-          <h1 className='headeline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-w-[15ch] mt-5 mb-8 lg:mb-10'>
+          <h1 className='headeline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-w-[15ch] mt-5 mb-4'>
             Engineering Scalable Full-Stack Systems
           </h1>
+
+          <p className='text-zinc-400 md:text-lg max-w-[42ch] mb-8 lg:mb-10'>
+            Rashid C &mdash; Full Stack Engineer building ERP, SaaS and
+            e-commerce systems with Next.js, Node.js, Django and PostgreSQL.
+          </p>
 
           <div className='lg:hidden mb-8'>
             <figure className='w-full max-w-[320px] mx-auto bg-gradient-to-t from-sky-400 via-sky-400 to-65% rounded-[40px] overflow-hidden ring-2 ring-sky-300/30 shadow-[0_0_40px_rgba(56,189,248,0.35)]'>

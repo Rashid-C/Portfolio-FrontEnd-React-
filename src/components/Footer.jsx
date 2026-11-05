@@ -9,6 +9,8 @@
 
 import { ButtonPrimary } from "./Button";
 import logo from '../images/logo-rc.svg'
+import { contact } from '../data/contact'
+
 const sitemap = [
   {
     label: "Home",
@@ -19,12 +21,16 @@ const sitemap = [
     href: "#about",
   },
   {
+    label: "Services",
+    href: "#services",
+  },
+  {
     label: "Work",
     href: "#work",
   },
   {
-    label: "Reviews",
-    href: "#reviews",
+    label: "Experience",
+    href: "#experience",
   },
   {
     label: "Contact me",
@@ -34,24 +40,24 @@ const sitemap = [
 
 const socials = [
   {
-    label: "GitHub",
-    href: "https://github.com/Rashid-C",
-  },
-  {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/rashid-c/",
+    href: contact.linkedin,
   },
   {
-    label: "Twitter X",
-    href: "/",
+    label: "GitHub",
+    href: contact.github,
+  },
+  {
+    label: "X (Twitter)",
+    href: contact.x,
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/rashidc.in",
+    href: contact.instagram,
   },
   {
-    label: "CodePen",
-    href: "/",
+    label: "WhatsApp",
+    href: contact.whatsappHref,
   },
 ];
 
@@ -64,52 +70,63 @@ const Footer = () => {
             <h2 className="headline-1 mb-8 lg:max-w-[12ch] reveal-up">
               Let&apos;s work together today!
             </h2>
-            <a href="mailto:anurashid11055@gmail.com">
-              <ButtonPrimary
-                href="mailto:anurashid11055@gmail.com"
-                label="Start project"
-                icon="chevron_right"
-                classes="reveal-up"
-              />
-            </a>
+            <ButtonPrimary
+              href={`mailto:${contact.email}`}
+              target="_self"
+              label="Start project"
+              icon="chevron_right"
+              classes="reveal-up"
+            />
+            <p className="text-sm text-zinc-400 mt-6 reveal-up">
+              <a
+                href={contact.phoneUae.href}
+                className="text-zinc-200 transition-colors hover:text-sky-300"
+              >
+                {contact.phoneUae.display}
+              </a>{" "}
+              (UAE) &middot;{" "}
+              <a
+                href={`mailto:${contact.email}`}
+                className="text-zinc-200 transition-colors hover:text-sky-300"
+              >
+                {contact.email}
+              </a>
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 lg:pl-20">
             <div>
-              <p className="mb-2 reveal-up">
-                Sitemap
-                <ul>
-                  {sitemap.map(({ label, href }, key) => (
-                    <li key={key}>
-                      <a
-                        href={href}
-                        className="block text-sm text-zinc-400 py-1 transition-colors hover:text-zinc-200 reveal-up"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </p>
+              <p className="mb-2 reveal-up">Sitemap</p>
+              <ul>
+                {sitemap.map(({ label, href }, key) => (
+                  <li key={key}>
+                    <a
+                      href={href}
+                      className="block text-sm text-zinc-400 py-1 transition-colors hover:text-zinc-200 reveal-up"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div>
-              <p className="mb-2 reveal-up">
-                Socials
-                <ul>
-                  {socials.map(({ label, href }, key) => (
-                    <li key={key}>
-                      <a
-                        href={href}
-                        target="_blank"
-                        className="block text-sm text-zinc-400 py-1 transition-colors hover:text-zinc-200 reveal-up"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </p>
+              <p className="mb-2 reveal-up">Socials</p>
+              <ul>
+                {socials.map(({ label, href }, key) => (
+                  <li key={key}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-sm text-zinc-400 py-1 transition-colors hover:text-zinc-200 reveal-up"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -117,7 +134,6 @@ const Footer = () => {
         <div className="flex items-center justify-between pt-10 mb-8">
           <a href="/" className="logo reveal-up">
             <img
-              // src="/images/logo.svg"
               src={logo}
               width={40}
               height={40}
@@ -136,4 +152,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

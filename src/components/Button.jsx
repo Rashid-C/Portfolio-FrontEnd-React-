@@ -7,7 +7,9 @@
  * Node modules
  */
 import PropTypes from 'prop-types'
-import cv from '../images/RASHID-C_FULL_STACK_DEV(MERN).pdf'
+import cv from '../images/Rashid_C_Full_Stack_Engineer_UAE.pdf'
+
+const CV_FILENAME = 'Rashid_C_Full_Stack_Engineer_UAE.pdf'
 
 /**
  * Primary Button
@@ -46,7 +48,7 @@ const ButtonPrimary = ({
       href={cv}
       target={target}
       className={`btn btn-primary ${classes}`}
-      download={cv}
+      download={CV_FILENAME}
       aria-label={ariaLabel}
       rel={rel}
     >

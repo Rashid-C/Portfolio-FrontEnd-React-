@@ -3,13 +3,46 @@
  * @license Apache-2.0
  */
 import { useState } from 'react'
+import { contact } from '../data/contact'
 
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ''
-// import { ButtonPrimary } from './Button';
+
+const contactRows = [
+  {
+    icon: 'call',
+    label: 'Phone (UAE) · primary',
+    value: contact.phoneUae.display,
+    href: contact.phoneUae.href,
+  },
+  {
+    icon: 'chat',
+    label: 'WhatsApp (UAE)',
+    value: contact.phoneUae.display,
+    href: contact.whatsappHref,
+    external: true,
+  },
+  {
+    icon: 'mail',
+    label: 'Email',
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+  },
+  {
+    icon: 'phone_iphone',
+    label: 'Phone (India)',
+    value: contact.phoneIndia.display,
+    href: contact.phoneIndia.href,
+  },
+  {
+    icon: 'location_on',
+    label: 'Location',
+    value: contact.location,
+  },
+]
 
 const socialLinks = [
   {
-    href: 'https://github.com/Rashid-C',
+    href: contact.github,
     icon: (
       <svg
         width='24'
@@ -27,7 +60,7 @@ const socialLinks = [
     alt: 'GitHub',
   },
   {
-    href: 'https://www.linkedin.com/in/rashid-c/',
+    href: contact.linkedin,
     icon: (
       <svg
         width='24'
@@ -45,7 +78,7 @@ const socialLinks = [
     alt: 'LinkedIn',
   },
   {
-    href: 'https://x.com/',
+    href: contact.x,
     icon: (
       <svg
         width='24'
@@ -60,10 +93,10 @@ const socialLinks = [
         />
       </svg>
     ),
-    alt: 'Twitter X',
+    alt: 'X (Twitter)',
   },
   {
-    href: 'https://www.instagram.com/rashidc.in',
+    href: contact.instagram,
     icon: (
       <svg
         width='25'
@@ -82,7 +115,7 @@ const socialLinks = [
   },
 
   {
-    href: 'https://wa.me/+918078967913',
+    href: contact.whatsappHref,
     icon: (
       <svg
         className=''
@@ -169,13 +202,55 @@ const Contact = () => {
       <div className='container lg:grid lg:grid-cols-2 lg:items-stretch'>
         <div className='mb-12 lg:mb-0 lg:flex lg:flex-col'>
           <h2 className='headline-2 lg:max-w-[12ch] reveal-up'>
-            Contact me for collaboration
+            Let&apos;s talk
           </h2>
 
-          <p className='text-zinc-400 mt-3 mb-8 max-w-[50ch] lg:max-w-[30ch] reveal-up'>
-            Reach out today to discuss your project needs and start
-            collaborating on something amazing!
+          <p className='text-zinc-400 mt-3 mb-8 max-w-[50ch] lg:max-w-[40ch] reveal-up'>
+            Hiring a full-stack engineer in Dubai, or need a business system
+            built? I&apos;m available immediately &mdash; call or WhatsApp my
+            UAE number, or send a message here.
           </p>
+
+          <ul className='space-y-3 mb-8'>
+            {contactRows.map(({ icon, label, value, href, external }) => {
+              const body = (
+                <>
+                  <span
+                    className='w-10 h-10 shrink-0 rounded-lg grid place-items-center bg-zinc-800 text-sky-400 ring-1 ring-inset ring-zinc-50/5'
+                    aria-hidden='true'
+                  >
+                    <span className='material-symbols-rounded text-[20px]'>
+                      {icon}
+                    </span>
+                  </span>
+                  <span className='min-w-0'>
+                    <span className='block text-xs text-zinc-500'>{label}</span>
+                    <span className='block text-zinc-200 break-words transition-colors group-hover:text-sky-300'>
+                      {value}
+                    </span>
+                  </span>
+                </>
+              )
+
+              return (
+                <li key={label} className='reveal-up'>
+                  {href ? (
+                    <a
+                      href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      className='group flex items-center gap-3 w-fit max-w-full rounded-lg pr-2'
+                    >
+                      {body}
+                    </a>
+                  ) : (
+                    <div className='flex items-center gap-3'>{body}</div>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+
           <div className='flex items-center gap-2 mt-auto'>
             {socialLinks.map(({ href, icon, alt }, key) => (
               <a
@@ -187,8 +262,9 @@ const Contact = () => {
                 className={`w-12 h-12 grid place-items-center ring-inset ring-2 ring-zinc-50/5 rounded-lg transition-transform duration-300 ease-in-out 
              hover:scale-125 hover:shadow-2xl active:bg-zinc-50/80 reveal-up
              ${
-               alt === 'WhatsApp' &&
-               'text-green-800 bg-green-500 animate-pulse shadow-lg animate-zoom'
+               alt === 'WhatsApp'
+                 ? 'text-green-800 bg-green-500 animate-pulse shadow-lg animate-zoom'
+                 : ''
              }`}
               >
                 {icon}
